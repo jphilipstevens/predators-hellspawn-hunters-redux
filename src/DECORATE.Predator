@@ -1,0 +1,493 @@
+// Invisibility -------------------------------------------------------------
+
+ACTOR XXBlurSphere : BlurSphere Replaces BlurSphere  //PowerupGiver 2024
+{
+	Game Doom
+	SpawnID 135
+	+COUNTITEM
+	+VISIBILITYPULSE
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.BIGPOWERUP
+	Inventory.MaxAmount 0
+	Powerup.Type Invisibility
+	RenderStyle Translucent
+	Inventory.PickupMessage "WHAT? WHERE AM I??"
+	States
+	{
+	Spawn:
+		PINS ABCD 6 Bright
+		Loop
+	}
+}	
+
+ACTOR XXPowerInvisibility : PowerInvisibility
+{
+  +SHADOW
+  Powerup.Duration 0x7FFFFFF
+  Powerup.Strength 80
+  Powerup.Mode "Fuzzy"
+}
+
+actor CloakOn : Inventory
+{Inventory.MaxAmount 1}
+
+//VISION MODES
+
+ACTOR XXPowerLightAmp : PowerLightAmp
+{
+  Powerup.Duration 0x7FFFFFF
+}
+
+ACTOR RedThermal : PowerLightAmp
+{
+  Powerup.Color FF0000, 0.5
+  Powerup.Duration 0x7FFFFFF
+}
+
+ACTOR BlueThermal : PowerLightAmp
+{
+  Powerup.Color 0000FF, 0.5
+  Powerup.Duration 0x7FFFFFF
+}
+
+ACTOR GreenThermal : PowerLightAmp
+{
+  Powerup.Color 00FF00, 0.2
+  Powerup.Duration 0x7FFFFFF
+}
+
+ACTOR ThermalLv : Inventory
+{Inventory.MaxAmount 3}
+
+actor Joy: CustomInventory
+{
+    Inventory.MaxAmount 0
+    +AUTOACTIVATE
+    States
+    {
+    Spawn:
+    TNT1 A 0
+    stop
+	Pickup:
+    TNT1 A 0 A_JumpIfInventory("PredatorHunterTag", 1, "PlaysoundHunter")
+    TNT1 A 0 A_JumpIfInventory("AssaultPredatorTag", 1, "PlaysoundAssault")
+	TNT1 A 0 A_JumpIfInventory("LightPredatorTag", 1, "PlaysoundHunter")
+    TNT1 A 0 A_JumpIfInventory("HeavyPredatorTag", 1, "PlaysoundAssault")
+	stop
+	PlaysoundHunter:
+	TNT1 A 0 A_PlaySound("HunterJoy")
+    stop
+	PlaysoundAssault:
+	TNT1 A 0 A_PlaySound("AssaultJoy")
+    stop
+    }
+}
+
+//PREDATOR UTILITIES
+
+Actor HunterPlayer : Inventory 
+{
+Inventory.RestrictedTo PredatorHunter
++INVENTORY.RESTRICTABSOLUTELY
+}
+
+
+Actor AssaultPlayer : Inventory 
+{
+Inventory.RestrictedTo AssaultPredator
++INVENTORY.RESTRICTABSOLUTELY
+}
+
+
+Actor HeavyPlayer : Inventory 
+{  
+Inventory.RestrictedTo HeavyPredator
++INVENTORY.RESTRICTABSOLUTELY
+}
+
+
+Actor LightPlayer : Inventory 
+{
+Inventory.RestrictedTo LightPredator
++INVENTORY.RESTRICTABSOLUTELY
+}
+
+ACTOR Energy : Inventory
+{
+  +INVENTORY.INVBAR
+  +INVENTORY.PERSISTENTPOWER
+  Inventory.InterHubAmount 1000
+  Inventory.Amount 1000
+  Inventory.MaxAmount 1000
+  Inventory.Icon "CELLA0"
+}
+
+ACTOR Poison : Inventory
+{}
+
+ACTOR PredatorHunterTag : Inventory
+{Inventory.MaxAmount 1
++INVENTORY.UNTOSSABLE}
+
+ACTOR AssaultPredatorTag : Inventory
+{Inventory.MaxAmount 1
++INVENTORY.UNTOSSABLE}
+
+ACTOR HeavyPredatorTag : Inventory
+{Inventory.MaxAmount 1
++INVENTORY.UNTOSSABLE}
+
+ACTOR LightPredatorTag : Inventory
+{Inventory.MaxAmount 1
++INVENTORY.UNTOSSABLE}
+
+//PICK UPS
+
+
+ACTOR EnergyShard1 : CustomInventory Replaces Cell
+{
+  Radius 28
+  Height 16
+  Inventory.PickupMessage "Picked up an energy shard."
+  States
+  {
+  Spawn:
+    CELL A -1
+    Stop
+  Pickup:
+    TNT1 A 1 A_GiveInventory ("Energy", 25)
+    Stop
+  }
+}
+
+ACTOR EnergyShard2 : EnergyShard1 Replaces Clip{}
+
+ACTOR BonusEnergy1 : EnergyShard1 Replaces HealthBonus
+{
+  Radius 28
+  Height 16
+  Scale 0.6
+  Inventory.PickupMessage "Picked up a bonus energy shard."
+  States
+  {
+  Spawn:
+    CELL A -1
+    Stop
+  Pickup:
+    TNT1 A 1 A_GiveInventory ("Energy", 5)
+    Stop
+  }
+}
+
+ACTOR BonusEnergy2 : BonusEnergy1 Replaces ArmorBonus{}
+
+ACTOR BigShard : CustomInventory Replaces CellPack
+{
+  Radius 28
+  Height 16
+  Inventory.PickupMessage "Picked up a Big energy shard."
+  States
+  {
+  Spawn:
+    CELP A -1
+    Stop
+  Pickup:
+    TNT1 A 1 A_GiveInventory ("Energy", 100)
+    Stop
+  }
+}
+
+ACTOR BigShard2 : BigShard Replaces ClipBox{}
+
+ACTOR BerserkTotem : Berserk replaces Berserk
+{
+  Scale 0.7
+  +COUNTITEM
+  +INVENTORY.PICKUPFLASH
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.PickupMessage "You got the Berserk Totem! Melee attacks inflict extra damage!"
+  Inventory.PickupSound "misc/p_pkup"
+  States
+  {
+  Spawn:
+    BTOT A -1
+    Stop
+  Pickup:
+    TNT1 A 0 A_GiveInventory("PowerStrength")
+    Stop
+  }
+}
+
+ACTOR PoisonTotem : CustomInventory replaces Infrared 
+{
+  Scale 0.7
+  +COUNTITEM
+  +INVENTORY.PICKUPFLASH
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.MaxAmount 1
+  Inventory.PickupMessage "You got the Poison Toten! Wristblades and Speargun Attacks are now poisonous!"
+  Inventory.PickupSound "misc/p_pkup"
+  States
+  {
+  Spawn:
+   PTOT A 1
+    Loop
+  Pickup:
+	TNT1 A 0 ACS_Execute(78)
+    Stop
+  }
+}
+
+ACTOR Adrenaline : Berserk replaces SoulSphere
+{
+  Scale 0.7
+  +COUNTITEM
+  +INVENTORY.PICKUPFLASH
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.PickupMessage "You got the Adrenaline!! Limited Pain tolerance and Strength Boost!"
+  Inventory.PickupSound "misc/p_pkup"
+  States
+  {
+  Spawn:
+    ATOT A 3
+    BTOT A 3
+	CTOT A 3
+    Loop
+  Pickup:
+    TNT1 A 0 A_GiveInventory("PowerStrength")
+	TNT1 A 0 HealThing(100, 0)
+	TNT1 A 0 ACS_Execute(77)
+    Stop
+  }
+}
+
+//ARMORS!!!
+
+ACTOR HunterPredArmor1 : BasicArmorPickup
+{
+ Inventory.RestrictedTo PredatorHunter
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTE0"
+  Armor.SavePercent 50
+  Armor.SaveAmount 100
+  States
+  {
+  Spawn:
+    PHA1 A 1
+    Loop
+  }
+}
+
+ACTOR HunterPredArmor2 : BasicArmorPickup
+{
+  Inventory.RestrictedTo PredatorHunter
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTF0"
+  Armor.SavePercent 50
+  Armor.SaveAmount 200
+  States
+  {
+  Spawn:
+    PHA2 A 1
+    Loop
+  }
+}
+
+ACTOR AssaultPredArmor1 : BasicArmorPickup
+{
+ Inventory.RestrictedTo AssaultPredator
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTC0"
+  Armor.SavePercent 40
+  Armor.SaveAmount 150
+  States
+  {
+  Spawn:
+    APA1 A 1
+    Loop
+  }
+}
+
+ACTOR AssaultPredArmor2 : BasicArmorPickup
+{
+ Inventory.RestrictedTo AssaultPredator
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTD0"
+  Armor.SavePercent 55
+  Armor.SaveAmount 250
+  States
+  {
+  Spawn:
+    APA2 A 1
+    Loop
+  }
+}
+
+ACTOR HeavyPredArmor1 : BasicArmorPickup
+{
+ Inventory.RestrictedTo HeavyPredator
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTA0"
+  Armor.SavePercent 60
+  Armor.SaveAmount 250
+  States
+  {
+  Spawn:
+    HPA1 A 1
+    Loop
+  }
+}
+
+ACTOR HeavyPredArmor2 : BasicArmorPickup
+{
+ Inventory.RestrictedTo HeavyPredator
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTB0"
+  Armor.SavePercent 85
+  Armor.SaveAmount 400
+  States
+  {
+  Spawn:
+    HPA2 A 1
+    Loop
+  }
+}
+
+ACTOR LightPredArmor1 : BasicArmorPickup
+{
+ Inventory.RestrictedTo LightPredator
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTG0"
+  Armor.SavePercent 30
+  Armor.SaveAmount 100
+  States
+  {
+  Spawn:
+    LPA1 A 1
+    Loop
+  }
+}
+
+ACTOR LightPredArmor2 : BasicArmorPickup
+{
+  Inventory.RestrictedTo LightPredator
+ +INVENTORY.RESTRICTABSOLUTELY
+  Scale 0.15
+  Radius 20
+  Height 16
+  Inventory.PickupMessage "$GOTARMOR" // "Picked up the armor."
+  Inventory.Icon "BOSTH0"
+  Armor.SavePercent 35
+  Armor.SaveAmount 150
+  States
+  {
+  Spawn:
+    LPA2 A 1
+    Loop
+  }
+}
+
+actor LightArmorPickup : CustomInventory replaces GreenArmor
+{
+  Inventory.PickupSound "misc/p_pkup"
+  Scale 0.15
+  +COUNTITEM
+  states
+  {
+  Spawn:
+    PHA1 A 8
+	APA1 A 8
+	HPA1 A 8
+	LPA1 A 8
+    Loop
+  Pickup:
+    TNT1 A 0 A_JumpifInventory ("PredatorHunterTag", 1, "HunterPickup")
+    TNT1 A 0 A_JumpifInventory ("AssaultPredatorTag", 1, "AssaultPickup")
+    TNT1 A 0 A_JumpifInventory ("HeavyPredatorTag", 1, "HeavyPickup")
+	TNT1 A 0 A_JumpifInventory ("LightPredatorTag", 1, "LightPickup")
+	stop
+	HunterPickup:
+	TNT1 A 0 A_Log("You got a Light Armor!")
+	TNT1 A 0 A_GiveInventory ("HunterPredArmor1")
+	Stop
+	AssaultPickup:
+	TNT1 A 0 A_Log("You got a Light Armor!")
+	TNT1 A 0 A_GiveInventory ("AssaultPredArmor1")
+	Stop
+	HeavyPickup:
+	TNT1 A 0 A_Log("You got a Light Armor!")
+	TNT1 A 0 A_GiveInventory ("HeavyPredArmor1")
+	Stop
+	LightPickup:
+	TNT1 A 0 A_Log("You got a Light Armor!")
+	TNT1 A 0 A_GiveInventory ("LightPredArmor1")
+	Stop
+  }
+}
+
+actor HeavyArmorPickup : CustomInventory replaces BlueArmor
+{
+  Inventory.PickupSound "misc/p_pkup"
+  Scale 0.15
+  +COUNTITEM
+  states
+  {
+  Spawn:
+    PHA2 A 8
+	APA2 A 8
+	HPA2 A 8
+	LPA2 A 8
+    Loop
+  Pickup:
+    TNT1 A 0 A_JumpifInventory ("PredatorHunterTag", 1, "HunterPickup")
+    TNT1 A 0 A_JumpifInventory ("AssaultPredatorTag", 1, "AssaultPickup")
+    TNT1 A 0 A_JumpifInventory ("HeavyPredatorTag", 1, "HeavyPickup")
+	TNT1 A 0 A_JumpifInventory ("LightPredatorTag", 1, "LightPickup")
+	stop
+	HunterPickup:
+	TNT1 A 0 A_Log("You got a Heavy Armor!")
+	TNT1 A 0 A_GiveInventory ("HunterPredArmor2")
+	Stop
+	AssaultPickup:
+	TNT1 A 0 A_Log("You got a Heavy Armor!")
+	TNT1 A 0 A_GiveInventory ("AssaultPredArmor2")
+	Stop
+	HeavyPickup:
+	TNT1 A 0 A_Log("You got a Heavy Armor!")
+	TNT1 A 0 A_GiveInventory ("HeavyPredArmor2")
+	Stop
+	LightPickup:
+	TNT1 A 0 A_Log("You got a Heavy Armor!")
+	TNT1 A 0 A_GiveInventory ("LightPredArmor2")
+	Stop
+  }
+}

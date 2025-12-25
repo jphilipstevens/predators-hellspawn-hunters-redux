@@ -1,0 +1,81 @@
+//LIGHT PREDATOR!
+
+ACTOR LightPredator : PlayerPawn
+{
+  Speed 1.2
+  Health 150
+  Radius 16
+  Height 56
+  Mass 100
+  PainChance 255
+  Player.MaxHealth 150
+  Player.JumpZ 16
+  BloodColor "Green"
+  BloodType "PredatorBlood"
+  Player.DisplayName "Light Predator"
+  Player.DamageScreenColor "Green"
+  Player.StartItem "WristBlade"
+  Player.StartItem "Energy", 500
+  Player.StartItem "LightPredatorTag"
+  Player.StartItem "LightPlayer"
+  Player.StartItem "NewRocketAmmo", 20
+  Player.WeaponSlot 1, WristBlade
+  //Player.WeaponSlot 2,
+  Player.WeaponSlot 3, ThrowingDaggers
+  Player.WeaponSlot 4, Speargun
+  Player.WeaponSlot 5, PlasmaCaster
+  Player.WeaponSlot 6, PredatorDisk
+  
+
+  States
+  {
+  Spawn:
+	PRED A -1
+    Goto loop
+  Idle:
+   TNT1 A 0 A_jump(250, 3)
+   PRED A 5 A_PlaySound("IDLE")
+   PRED A 5
+   Goto StealthCheck
+  See:
+	TNT1 A 0 A_jump(250, 2)
+    PRED A 5 A_PlaySound("IDLE")
+	PRED ABCD 4 
+    Goto StealthCheck
+  Missile:
+    PRED E 12 
+    Goto Spawn
+  Melee:
+    PRED F 6 BRIGHT
+    Goto Missile
+	StealthCheck:
+    TNT1 A 0 A_JumpIfInventory("CloakOn", 1, "StealthOn")
+    PRED A 70 A_GiveInventory("Energy", 1)
+	Goto Idle
+   StealthOn:
+      PRED A 35 A_TakeInventory("Energy", 1)
+      TNT1 A 0 A_JumpIfInventory("Energy", 1, "StealthCheck")
+      TNT1 A 0 A_TakeInventory("xxPowerInvisibility", 1)
+      TNT1 A 0 A_TakeInventory("CloakOn", 1)
+	  TNT1 A 0 A_Playsound("cloakoff")
+      Goto Idle
+  Pain:
+    PRED G 4 
+    PRED G 4 A_Playsound("PRHURT")
+    Goto Spawn
+  Death:
+    PRED H 10
+    PRED I 10 A_Playsound("PDEAD")
+    PRED J 10 A_NoBlocking
+    PRED KLM 10
+    PRED N -1
+    Stop
+  XDeath:
+    PRED O 5
+    PRED P 5 A_Playsound("PREDSIT4")
+    PRED Q 5 A_NoBlocking
+    PRED RSTUV 5
+    PRED W -1
+    Stop
+  }
+}

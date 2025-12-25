@@ -1,0 +1,114 @@
+actor PredatorBlood
+{
+ game Doom
++FORCEXYBILLBOARD
++GHOST
++NOBLOCKMAP
++NOGRAVITY
++NOCLIP
+-DONTSPLASH
+-ALLOWPARTICLES 
+Speed 0
+ states
+ {
+  Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Splash")
+		
+        TNT1 A 0 A_CustomMissile ("FlyingBrightGreenBlood", 0, 0, random (0, 360), 2, random (30, 150))
+		TNT1 AAAAA 0 A_CustomMissile ("FlyingBrightGreenBloodDecorative", 0, 0, random (0, 360), 2, random (0, 360))
+		TNT1 A 10
+        stop
+	Splash:
+        BLOD A 0
+        stop
+ }
+}
+
+ACTOR FlyingBrightGreenBlood
+{
+ game Doom
+ scale 1.5
+ speed 6
+ health 1
+ radius 8
+ height 1
+ Gravity 0.9
+ //damage 1
+ Renderstyle Translucent
+ Alpha 1.0
+	Decal None
+   +MISSILE
+   +CLIENTSIDEONLY
+   +NOTELEPORT
+   +NOBLOCKMAP
+   +THRUACTORS
+    +BLOODLESSIMPACT 
+   +FORCEXYBILLBOARD
+   +NODAMAGETHRUST
+   +MOVEWITHSECTOR
+   +CORPSE
+   -DONTSPLASH
+   Mass 1
+    States
+    {
+     Spawn:
+     PRBL ABC 2 BRIGHT
+	 Spawn1:
+		PRBL D 6 BRIGHT
+        loop
+     Death:
+				TNT1 A 0
+				TNT1 A 1 A_SpawnItemEx("PredatorBloodSpot", 0, 0, 0, 0, 0, 0, random(0, 360))
+  Stop
+    }
+}
+
+ACTOR FlyingBrightGreenBloodDecorative: FlyingBrightGreenBlood
+{
+Speed 5
+Scale 0.8
+    States
+    {
+     Spawn:
+     PRBL ABCDDDDDDD 2 BRIGHT
+	 Stop
+     Death:
+  	 TNT1 A 1
+  Stop
+    }
+}
+
+
+
+actor PredatorBloodSpot
+{
+ game Doom
+ radius 1
+ height 1
+ Mass 0
+  RenderStyle Translucent
+  Alpha 0.93
+ +NOTELEPORT
+ +NOBLOCKMAP
++CLIENTSIDEONLY
++FORCEXYBILLBOARD
++MOVEWITHSECTOR
++FLOORCLIP
++MISSILE
++DONTSPLASH
++EXPLODEONWATER
+Scale 0.5
+Decal BrutalBloodSplat
+ states
+ {
+ Spawn:
+ Death:
+ Crash:
+  TNT1 A 0 A_JumpIf(waterlevel > 1, "Splash")
+  PRBL E 4500 BRIGHT
+  stop
+	Splash:
+        BLBD A 0
+        stop
+ }
+}

@@ -1,0 +1,152 @@
+#library "PREDSPE.txt"
+#include "zcommon.acs"
+
+Script 77 (VOID)
+{
+	Delay(2100);
+	TakeInventory("PowerStrength", 1);
+	Print(s:"You feel exhausted. Damage back to normal.");
+	}
+	
+Script 78 (VOID)
+{
+	GiveInventory ("Poison", 1);
+	Delay(2100);
+	TakeInventory("Poison", 1);
+	Print(s:"Poison has worn off.");
+	}
+
+Script 988 (VOID)
+{
+	int gevis = CheckInventory("ThermalLv");
+	
+	If(gevis > 2)
+	{
+    ActivatorSound ("predvic", 120);	
+	TakeInventory ("GreenThermal", 1);
+	TakeInventory ("BlueThermal", 1);
+	TakeInventory ("RedThermal", 1);
+	TakeInventory ("ThermalLv", 99);
+	SetResultValue(0);
+	}
+Else
+	{
+    ActivatorSound ("predvic", 120);	
+	GiveInventory ("GreenThermal", 1);
+	TakeInventory ("BlueThermal", 1);
+	TakeInventory ("RedThermal", 1);
+	GiveInventory ("ThermalLv", 3);
+	SetResultValue(3);	
+	}
+}
+
+Script 989 (VOID)
+{
+	int bevis = CheckInventory("ThermalLv");
+	
+	If(bevis > 1)
+	{
+    ActivatorSound ("predvic", 120);
+	TakeInventory ("GreenThermal", 1);
+	TakeInventory ("BlueThermal", 1);
+	TakeInventory ("RedThermal", 1);
+	TakeInventory ("ThermalLv", 99);
+	SetResultValue(0);	
+	}
+Else
+	{
+    ActivatorSound ("predvic", 120);	
+	TakeInventory ("GreenThermal", 1);
+	GiveInventory ("BlueThermal", 1);
+	TakeInventory ("RedThermal", 1);
+	GiveInventory ("ThermalLv", 2);
+	SetResultValue(2);	
+	}
+}
+
+
+Script 990 (VOID)
+{
+	int revis = CheckInventory("ThermalLv");
+	
+	If(revis > 0)
+	{
+    ActivatorSound ("predvic", 120);	
+	TakeInventory ("GreenThermal", 1);
+	TakeInventory ("BlueThermal", 1);
+	TakeInventory ("RedThermal", 1);
+	TakeInventory ("ThermalLv", 99);
+	SetResultValue(0);	
+	}
+Else
+	{
+    ActivatorSound ("predvic", 120);	
+	TakeInventory ("GreenThermal", 1);
+	TakeInventory ("BlueThermal", 1);
+	GiveInventory ("RedThermal", 1);
+	GiveInventory ("ThermalLv", 1);
+	SetResultValue(1);	
+	}
+}	
+
+Script 993 (VOID)
+{
+	int call = CheckInventory("Recall");
+	
+	If (Call > 0)
+	{
+	Print(s:"Retrieving disk in 5");
+	Delay(35);
+	Print(s:"Retrieving disk in 4");
+	Delay(35);
+	Print(s:"Retrieving disk in 3");
+	Delay(35);
+	Print(s:"Retrieving disk in 2");
+	Delay(35);
+	Print(s:"Retrieving disk in 1");
+	Delay(35);
+	TakeInventory("Recall", 1);
+	GiveInventory("Disk", 1);
+	Print(s:"Disc Retrieved");
+	SetWeapon("PredatorDisk");
+	//Delay(20);
+	}
+Else
+	{
+	Print(s:"No Disc to Recall");
+	Delay(40);
+	}
+}
+
+Script 998 (VOID)
+{
+	int invx = CheckInventory("xxPowerInvisibility");
+	
+  If(invx > 0)
+   {
+   SetResultValue(1);
+		TakeInventory ("xxPowerInvisibility", 1);
+		TakeInventory ("CloakOn", 1);
+		ActivatorSound ("cloakoff", 120);
+	}
+	Else	
+	{
+	SetResultValue(0);
+		GiveInventory ("xxPowerInvisibility", 1);
+		GiveInventory ("CloakOn", 1);
+		ActivatorSound("cloakon", 120);
+	}	
+}
+
+Script 999 (VOID)
+{
+	ActivatorSound("/predator/laughta2", 120);
+}
+
+Script "ResetBerserkCount" Enter 
+{
+  TakeInventory("CloakOn", 1);
+  TakeInventory("xxPowerInvisibility", 1);
+  TakeInventory("ThermalLv", 99);  
+  TakeInventory("Poison", 99);
+}

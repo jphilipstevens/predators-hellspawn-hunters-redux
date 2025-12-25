@@ -1,0 +1,140 @@
+PulseLight PlasmaLight
+{
+Offset 0 2 0
+Color 0.0 0.0 1.0
+Size 80
+SecondarySize 90
+Interval 3.0
+}
+
+FlickerLight PlasmaExplode
+{
+Offset 0 2 0
+Color 0.0 0.0 1.0
+Size 140
+SecondarySize 160
+}
+
+Object PlasmaShot1
+{
+Frame PFOGA { Light PlasmaExplode }
+Frame PFOGB { Light PlasmaExplode }
+Frame PLSSA { Light PlasmaLight }
+Frame PLSSB { Light PlasmaLight }
+}
+
+Object PlasmaShot2
+{
+Frame PFOGA { Light PlasmaExplode }
+Frame PFOGB { Light PlasmaExplode }
+Frame PLSSA { Light PlasmaLight }
+Frame PLSSB { Light PlasmaLight }
+}
+
+PulseLight EMPLight
+{
+Offset 0 2 0
+Color 0.3 0.3 1.0
+Size 80
+SecondarySize 90
+Interval 3.0
+}
+
+FlickerLight EMPExplode
+{
+Offset 0 2 0
+Color 0.3 0.3 1.0
+Size 140
+SecondarySize 160
+}
+
+Object EMPBall
+{
+Frame PLBAA { Light EMPLight }
+Frame PLBAB { Light EMPLight }
+Frame PLBAC { Light EMPLight }
+Frame PLBAD { Light EMPLight }
+Frame EMPEA { Light EMPExplode }
+Frame EMPEB { Light EMPExplode }
+Frame EMPEC { Light EMPExplode }
+Frame EMPED { Light EMPExplode }
+}
+
+Object StunnerBall
+{
+Frame PLBAA { Light EMPLight }
+Frame PLBAB { Light EMPLight }
+Frame PLBAC { Light EMPLight }
+Frame PLBAD { Light EMPLight }
+Frame EMPEA { Light EMPExplode }
+Frame EMPEB { Light EMPExplode }
+Frame EMPEC { Light EMPExplode }
+Frame EMPED { Light EMPExplode }
+}
+
+PulseLight PlasmaGrenadeLight
+{
+Offset 0 2 0
+Color 0.0 0.0 1.0
+Size 80
+SecondarySize 90
+Interval 0.4
+}
+
+Object PlasmaGrenadeShot
+{
+Frame PFOGA { Light PlasmaExplode }
+Frame PFOGB { Light PlasmaExplode }
+Frame PLBAA { Light PlasmaGrenadeLight }
+Frame PLBAB { Light PlasmaGrenadeLight }
+Frame PLBAC { Light PlasmaGrenadeLight }
+Frame PLBAD { Light PlasmaGrenadeLight }
+Frame EMPEA { Light EMPExplode }
+Frame EMPEB { Light EMPExplode }
+Frame EMPEC { Light EMPExplode }
+Frame EMPED { Light EMPExplode }
+}
+
+Object PlasmaGrenadeBounce
+{
+Frame PFOGA { Light PlasmaExplode }
+Frame PFOGB { Light PlasmaExplode }
+Frame PLBAA { Light PlasmaGrenadeLight }
+Frame PLBAB { Light PlasmaGrenadeLight }
+Frame PLBAC { Light PlasmaGrenadeLight }
+Frame PLBAD { Light PlasmaGrenadeLight }
+Frame EMPEA { Light EMPExplode }
+Frame EMPEB { Light EMPExplode }
+Frame EMPEC { Light EMPExplode }
+Frame EMPED { Light EMPExplode }
+}
+
+PulseLight MissileLight
+{
+Offset 0 2 0
+Color 0.55 0.44 0.0
+Size 80
+SecondarySize 90
+Interval 3.0
+}
+
+FlickerLight MissileExplode
+{
+Offset 0 2 0
+Color 0.55 0.44 0.0
+Size 140
+SecondarySize 160
+}
+
+Object WristMiniMissile
+{
+Frame MMISA { Light MissileLight }
+Frame FRFXA { Light MissileExplode }
+Frame FRFXB { Light MissileExplode }
+Frame FRFXC { Light MissileExplode }
+Frame FRFXD { Light MissileExplode }
+Frame FRFXE { Light MissileExplode }
+Frame FRFXF { Light MissileExplode }
+Frame FRFXG { Light MissileExplode }
+Frame FRFXH { Light MissileExplode }
+}

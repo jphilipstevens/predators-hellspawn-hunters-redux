@@ -1,0 +1,11 @@
+gameinfo
+ {
+   weaponslot = 1, "WristBlade", "DoubleBlades"
+   weaponslot = 2, "Spear", "Whip"
+   weaponslot = 3, "EMPPistol", "WristMissileLauncher"
+   weaponslot = 4, "SpearGun", "PlasmaBomber"
+   weaponslot = 5, "PlasmaCaster"
+   weaponslot = 6, "PredatorDisk"
+   weaponslot = 7, "Netgun", "AssaultRailgun"
+   // add other slots here...
+ }

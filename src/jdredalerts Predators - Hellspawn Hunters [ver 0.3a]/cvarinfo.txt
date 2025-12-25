@@ -1,0 +1,6 @@
+// Footsteps V3
+// CVar Info
+user float cl_step_volmul = 7.0;
+user float cl_step_delaymul = 1.0;
+user noarchive int strtoval = 0;
+user noarchive float strtofloat = 0.0;

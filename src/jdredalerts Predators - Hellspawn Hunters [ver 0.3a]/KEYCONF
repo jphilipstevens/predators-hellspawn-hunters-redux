@@ -1,0 +1,24 @@
+clearplayerclasses
+addplayerclass PredatorHunter
+addplayerclass AssaultPredator
+addplayerclass HeavyPredator
+addplayerclass LightPredator
+
+   addkeysection "PREDATOR SPECIAL" PredatorSpecial               // the last unquoted bit used to say MySampleKeysection
+   
+   
+   addmenukey "Toggle Cloak" cloakonoff
+   alias cloakonoff "puke 998"
+   defaultbind C cloakonoff
+   
+   addmenukey "Toggle Red Thermal Vision" trtv
+   alias trtv "puke 990"
+   defaultbind r trtv
+   
+   addmenukey "Toggle Blue Thermal Vision" tbtv
+   alias tbtv "puke 989"
+   defaultbind b tbtv
+   
+   addmenukey "Toggle Green Thermal Vision" tgtv
+   alias tgtv "puke 988"
+   defaultbind g tgtv

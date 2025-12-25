@@ -1,0 +1,1427 @@
+//ZOMBIEMAN
+
+ACTOR ZombieMan2 : Zombieman Replaces Zombieman
+{
+DropItem "Clip", 128
+DropItem "ThrowingDaggers", 127
++MISSILEMORE
++MISSILEEVENMORE
++QUICKTORETALIATE
+Tag "Zombie Man"
+PainChance "Stunner", 255
+Painchance "Net", 255
+Painchance "Bleed", 255
+DamageFactor "Net", 1
+States
+  {
+    See:
+    POSS AABBCCDD 4 A_Chase
+	TNT1 A 0 A_JumpIfInventory("GiveUpCounter", 15, "GiveUp")
+	TNT1 A 0 A_GiveInventory("GiveUpCounter", 1)
+    Loop
+	GiveUp:
+	TNT1 A 0 A_TakeInventory("GiveUpCounter", 15)
+    TNT1 A 0 A_ClearTarget   
+	Goto Spawn
+    Missile:
+	TNT1 A 0 A_TakeInventory("GiveUpCounter", 15)
+	TNT1 A 0 A_Jump(128, "RepeaterShot")
+    POSS E 8 A_FaceTarget
+    POSS F 6 A_PosAttack
+    POSS E 6
+    Goto See
+	RepeaterShot:
+	POSS E 8 A_FaceTarget
+    POSS F 4 A_PosAttack
+    POSS E 4
+	POSS F 4 A_PosAttack
+    POSS E 4
+	POSS F 4 A_PosAttack
+    POSS E 4
+	POSS F 4 A_PosAttack
+    POSS E 4
+	Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+	Pain.Stunner:
+	TNT1 A 0 A_Pain
+    POSS G 70
+    POSS G 70 A_Pain
+	POSS G 35
+    Goto See
+	Pain.Net:
+	TNT1 A 0 A_Pain
+    POSN A 35 A_PlaySound("Bloody")
+    POSN A 35 A_Pain
+	POSN A 35 A_PlaySound("Bloody")
+    POSN A 35 A_Pain
+	POSN A 35 A_SpawnItemEX("NetDamage")
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    Goto See
+	Death:
+	TNT1 A 0 A_Jump(128, "Death2")
+	TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    POSS HHHHH 1 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    POSS I 5 A_Scream
+    POSS J 5 A_NoBlocking
+    POSS K 5
+    POSS L -1
+    Stop
+	Death2:
+	TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    POSH UUUUU 1 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	POSH V 5 A_Scream
+    POSH W 5
+    POSH X 5 A_NoBlocking
+    POSH Y 5
+    POSH Z -1
+    Stop
+	Death.Decapitate:
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TNT1 A 0 A_Jump(128, "DecapitatedAgain")
+	TNT1 A 0 A_SpawnItemEx("ZombiemanHead", 0, 0, 0, 0, 0, 10, 0)
+	POSH A 15 A_Playsound("BLOODY")
+	POSH B 5
+	POSH C 5 A_NoBlocking
+	POSH DE 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	POSH F -1
+	Stop
+    DecapitatedAgain:
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TNT1 A 0 A_SpawnItemEx("ZombiemanHead", 0, 0, 0, 0, 0, 10, 0)
+	ZMAD A 15 A_Playsound("BLOODY")
+	ZMAD B 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	ZMAD C 5 A_NoBlocking
+	ZMAD D 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	ZMAD E -1
+	Stop
+	Death.DiskDamage:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TNT1 A 0 A_SpawnItemEx("ZombiemanTorso", 0, 0, 0, 0, 0, 10, 0)
+	POSX A 15 A_Playsound("BLOODY")
+	POSX B 5
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	POSX C 5 A_NoBlocking
+	POSX D 5
+	POSX E -1
+	Stop
+	Death.Obliterate:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	DUST AB 2 
+	DUST C 2 A_NoBlocking
+	DUST DEFGHIJK 2
+	DUST L -1
+	Stop
+  XDeath:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    POSS M 5 A_XScream
+    POSS N 5
+    POSS O 5 A_NoBlocking
+    POSS PQRST 5
+    POSS U -1
+    Stop 
+	}
+}
+
+Actor ZombiemanHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    ZHEA A 1
+    Loop
+  }
+}
+
+Actor ZombiemanTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    POSX F 1
+    Loop
+  }
+}
+
+//SHOTGUN GUY
+
+ACTOR ShotgunGuy2 : ShotgunGuy replaces ShotgunGuy
+{
+  PainChance "Stunner", 255
+  Painchance "Net", 255
+  DropItem "shell", 96
+  DropItem "RocketAmmo", 96
+  Painchance "Bleed", 255
+  Tag "Seargent"
+  States
+{
+ See:
+    SPOS AABBCCDD 4 A_Chase
+	TNT1 A 0 A_JumpIfInventory("GiveUpCounter", 18, "GiveUp")
+    TNT1 A 0 A_GiveInventory("GiveUpCounter", 1)
+    Loop
+	GiveUp:
+    TNT1 A 0 A_TakeInventory("GiveUpCounter", 18)
+	TNT1 A 0 A_ClearTarget
+Goto Spawn
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+  Pain.Stunner:
+	TNT1 A 0 A_Pain
+    SPOS G 70
+    SPOS G 70 A_Pain
+	SPOS G 35
+    Goto See
+	Pain.Net:
+	TNT1 A 0 A_Pain
+    SPON A 35 A_PlaySound("Bloody")
+    SPON A 35 A_Pain
+	SPON A 35 A_PlaySound("Bloody")
+    SPON A 35 A_Pain
+	SPON A 35 A_SpawnItemEX("NetDamage")
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    Goto See
+  Missile:
+    TNT1 A 0 A_TakeInventory("GiveUpCounter", 18)
+    SPOS E 8 A_FaceTarget
+    SPOS F 0 Bright A_SPosAttackUseAtkSound
+    SPOS F 8 Bright A_SPosAttackUseAtkSound
+	SPOS E 8
+    Goto See
+	Death:
+	TNT1 A 0 A_Jump(128, "Death2")
+	TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    SPOS H 5
+    SPOS I 5 A_Scream
+    SPOS J 5 A_NoBlocking
+    SPOS K 5
+    SPOS L -1
+    Stop
+	Death2:
+	TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    SGDE UUUUU 1 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    SGDE V 5 A_Scream
+    SGDE W 5 A_NoBlocking
+    SGDE XYZ 5
+    SGDE Z -1
+    Stop
+	Death.Decapitate:
+	TNT1 A 0 A_SpawnItemEx("ShotgunGuyHead", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	SPDH A 15 A_Playsound("BLOODY")
+	SPDH B 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	SPDH C 5 A_NoBlocking
+	SPDH D 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	SPDH E -1
+	Stop
+	Death.DiskDamage:
+	SPOS M 5 A_GiveToTarget("Joy")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TNT1 A 0 A_SpawnItemEx("ShotgunGuyTorso", 0, 0, 0, 0, 0, 10, 0)
+	SZD1 E 15 A_Playsound("BLOODY")
+	SZD1 F 5
+	SZD1 G 5 A_NoBlocking
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	SZD1 H 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	SZD1 H -1
+	Stop
+	Death.Obliterate:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	DUST AB 2 
+	DUST C 2 A_NoBlocking
+	DUST DEFGHIJK 2
+	DUST L -1
+	Stop
+  XDeath:
+    SPOS M 5 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    SPOS N 5 A_XScream
+    SPOS O 5 A_NoBlocking
+    SPOS PQRST 5
+    SPOS U -1
+    Stop
+	  }
+}
+
+Actor ShotgunGuyHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    SPHE A 1
+    Loop
+  }
+}
+
+Actor ShotgunGuyTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    SZD1 I 1
+    Loop
+  }
+}
+
+//CHAINGUNGUY
+
+ACTOR NewChaingunGuy : Chaingunguy Replaces ChaingunGuy
+{
+PainChance "Stunner", 255
+PainChance "EMP", 255
+PainChance "Net", 255
+DamageFactor "Net", 3
+Painchance "Bleed", 255
+Tag "Commando"
+Dropitem "Clip", 128
+Dropitem "ClipBox", 16
+ States
+ {
+ See:
+    CPOS AABBCCDD 3 A_Chase
+	TNT1 A 0 A_JumpIfInventory("GiveUpCounter", 18, "GiveUp")
+	TNT1 A 0 A_GiveInventory("GiveUpCounter", 1)
+    Loop
+	GiveUp:
+	TNT1 A 0 A_TakeInventory("GiveUpCounter", 18)
+	TNT1 A 0 A_ClearTarget
+    Goto Spawn
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+ Pain.Stunner:
+	TNT1 A 0 A_Pain
+    CPOS G 70
+    CPOS G 70 A_Pain
+	CPOS G 35
+    Goto See
+ Pain.EMP:
+	TNT1 A 0 A_Giveinventory("EMPJam", 1)
+    CPOS G 3
+    CPOS G 3 A_Pain
+    Goto See
+	Pain.Net:
+	TNT1 A 0 A_Pain
+    CPNT A 35 A_PlaySound("Bloody")
+    CPNT A 35 A_Pain
+	CPNT A 35 A_PlaySound("Bloody")
+    CPNT A 35 A_Pain
+	CPNT A 35 A_SpawnItemEX("NetDamage")
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    Goto See
+  Missile:
+    TNT1 A 0 A_TakeInventory("GiveUpCounter", 15)
+    TNT1 A 0 A_JumpIfInventory("EMPJam", 1, "JammedWeapon")
+	TNT1 A 0 A_Jump(128, "FasterFire")
+	Goto NormalFire
+	NormalFire:
+    CPOS E 10 A_FaceTarget
+    CPOS FE 4 Bright A_CPosAttack
+    CPOS F 1 A_CPosRefire
+    Goto NormalFire+1
+  FasterFire:
+    CPOS E 10 A_FaceTarget
+    CPOS FE 2	 Bright A_CPosAttack
+    CPOS F 1 A_CPosRefire
+    Goto FasterFire+1
+  JammedWeapon:
+	TNT1 A 0 A_TakeInventory("EMPJam")
+    CPOS E 10 A_FaceTarget
+	TNT1 A 0 A_Playsound("DRYFIRE")
+    CPOS E 60
+    Goto See
+	Death:
+    TNT1 A 0 A_Jump(128, "Death2")
+	TNT1 AAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    CPOS H 5
+    CPOS I 5 A_Scream
+    CPOS J 5 A_NoBlocking
+    CPOS KLM 5
+    CPOS N -1
+    Stop
+	Death2:
+	TNT1 AAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    CPHM A 5
+    CPHM B 5 A_Scream
+    CPHM C 5 A_NoBlocking
+    CPHM DE 5 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    CPHM F -1
+    Stop
+	Death.Decapitate:
+	TNT1 A 0 A_SpawnItemEx("ChaingunnerHead", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	CPHS A 15 A_Playsound("BLOODY")
+	CPHS B 5
+	CPHS C 5 A_NoBlocking
+	CPHS DE 5
+	CPHS F -1
+	Stop
+	Death.DiskDamage:
+	CPOS O 5 A_GiveToTarget("Joy")
+	Goto Death.Decapitate
+	Death.Obliterate:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	DUST AB 2 
+	DUST C 2 A_NoBlocking
+	DUST DEFGHIJK 2
+	DUST L -1
+	Stop
+	XDeath:
+    CPOS O 5 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    CPOS P 5 A_XScream
+    CPOS Q 5 A_NoBlocking
+    CPOS RS 5
+    CPOS T -1
+    Stop
+   }
+}
+	
+	Actor ChaingunnerHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    CHED A 1
+    Loop
+  }
+}
+	
+	
+//IMP
+
+ACTOR DoomImp2 : DoomImp Replaces DoomImp
+{
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  PainChance "Stunner", 255
+  PainChance "Net", 255
+  Painchance "Bleed", 255
+  DamageFactor "Net", 3
+  Tag "Imp"
+  States
+  {
+  See:
+    TROO AABBCCDD 3 A_Chase
+	TNT1 A 0 A_JumpIfInventory("GiveUpCounter", 18, "GiveUp")
+	TNT1 A 0 A_GiveInventory("GiveUpCounter", 1)
+    Loop	
+	GiveUp:
+	TNT1 A 0 A_TakeInventory("GiveUpCounter", 18)
+	TNT1 A 0 A_ClearTarget
+	Goto Spawn
+	Melee:
+  Missile:
+	TNT1 A 0 A_TakeInventory("GiveUpCounter", 18)
+    TROO EF 5 A_FaceTarget
+    TROO G 6 A_TroopAttack
+    Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+  Pain.Stunner:
+	TNT1 A 0 A_Pain
+    TROO H 70
+    TROO H 70 A_Pain
+	TROO H 35
+    Goto See
+  Pain.Net:
+	TNT1 A 0 A_Pain
+    IMPN A 35 A_PlaySound("Bloody")
+    IMPN A 35 A_Pain
+	IMPN A 35 A_PlaySound("Bloody")
+    IMPN A 35 A_Pain
+	IMPN A 35 A_SpawnItemEX("NetDamage")
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    Goto See
+  Death.Decapitate:
+	TNT1 A 0 A_SpawnItemEx("ImpHead", 0, 0, 0, 0, 0, 10, 0)
+	TROH A 15 A_Playsound("BLOODY")
+	TROH B 5
+	TROH C 5 A_NoBlocking
+	TROH D 5
+	TROH E -1
+	Stop
+	Death.DiskDamage:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TNT1 A 0 A_SpawnItemEx("ImpTorso", 0, 0, 0, 0, 0, 10, 0)
+	TROG A 15 A_Playsound("BLOODY")
+	TROG B 5
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TROG C 5 A_NoBlocking
+	TROG DEFGH 5
+	TROG H -1
+	Stop
+	Death:
+	TNT1 AAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TROO I 8
+    TROO J 8 A_Scream
+    TROO K 6
+    TROO L 6 A_NoBlocking
+    TROO M -1
+    Stop
+	Death.Obliterate:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	DUST AB 2 
+	DUST C 2 A_NoBlocking
+	DUST DEFGHIJK 2
+	DUST L -1
+	Stop
+  XDeath:
+    TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TROO N 5
+    TROO O 5 A_XScream
+    TROO P 5
+    TROO Q 5 A_NoBlocking
+    TROO RST 5
+    TROO U -1
+    Stop
+
+  }
+}
+
+Actor ImpHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    IHED A 1
+    Loop
+  }
+}
+
+Actor ImpTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    TROG K 1
+    Loop
+  }
+}
+
+
+//DEMON
+
+ACTOR NewDemon : Demon Replaces Demon
+{
+PainChance "Stunner", 255
+Painchance "Bleed", 255
+GibHealth 80
+Tag "Demon"
+  States
+  {
+  See:
+    SARG AABBCCDD 2 Fast A_Chase
+	TNT1 A 0 A_JumpIfInventory("GiveUpCounter", 60, "GiveUp")
+	TNT1 A 0 A_GiveInventory("GiveUpCounter", 1)
+    Loop
+	GiveUp:
+	TNT1 A 0 A_TakeInventory("GiveUpCounter", 60)
+	TNT1 A 0 A_ClearTarget
+Goto Spawn
+  Melee:
+    TNT1 A 0 A_TakeInventory("GiveUpCounter", 60)
+    SARG EF 2 Fast A_FaceTarget
+    SARG G 4 Fast A_SargAttack
+    Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+  Pain.Stunner:
+	TNT1 A 0 A_Pain
+    SARG H 70
+    SARG H 70 A_Pain
+	SARG H 35
+    Goto See
+  Death.Decapitate:
+	SARH A 15 A_Scream
+    SARH B 8 
+    SARH C 4
+    SARH D 4 A_NoBlocking
+    SARH D -1
+    Stop 
+  Death.DiskDamage:
+	TNT1 A 0 A_SpawnItemEx("DemonTorso", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TNT1 A 0 A_GiveToTarget("Joy")
+	SARC A 8 A_Scream
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    SARC B 8 
+    SARC C 4
+    SARC D 4 A_NoBlocking
+    SARC D -1
+    Stop 
+  XDeath:
+    TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    SARG O 8
+    SARG P 8 A_Scream
+    SARG Q 4
+    SARG R 4 A_NoBlocking
+    SARG S 4
+    SARG T -1
+    Stop 
+	
+	}
+}
+
+Actor DemonTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    SARC E 5
+	SARC F 5
+    Goto Spawn+1
+  }
+}
+
+Actor NewSpectre : NewDemon Replaces Spectre 
+{
+ +SHADOW
+  RenderStyle OptFuzzy
+  Tag "Spectre"
+  Alpha 0.5
+  States
+  {
+  Death.DiskDamage:
+	TNT1 A 0 A_SpawnItemEx("SpectreTorso", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 A 0 A_GiveToTarget("Joy")
+	SARC A 8 A_Scream
+    SARC B 8 
+    SARC C 4
+    SARC D 4 A_NoBlocking
+    SARC D -1
+    Stop 
+	}
+}
+Actor SpectreTorso : DemonTorso
+{
+ +SHADOW
+  RenderStyle OptFuzzy
+  Alpha 0.5
+}
+
+ACTOR NewRevenant : Revenant Replaces Revenant
+{
+PainChance "EMP", 128
+Painchance "Bleed", 255
+Tag "Revenant"
+States
+  {
+  Pain.EMP:
+	TNT1 A 0 A_Giveinventory("EMPJam", 1)
+	SKEL L 5
+    SKEL L 5 A_Pain
+    Goto See
+   Melee:
+    TNT1 A 0 A_Jump(128, "SuperPunch")
+    SKEL G 1 A_FaceTarget
+    SKEL G 3 A_SkelWhoosh
+    SKEL H 3 A_FaceTarget
+    SKEL I 3 A_SkelFist
+    Goto See
+   SuperPunch:
+    SKEL G 1 A_FaceTarget
+    SKEL G 6 A_SkelWhoosh
+    SKEL H 6 A_FaceTarget
+    SKEL I 6 A_CustomMeleeAttack(random(1,10)*8,"none","none")
+    Goto See
+   Missile:
+    TNT1 A 0 A_JumpIfInventory("EMPJam", 1, "JammedWeapon")
+    TNT1 A 0 A_Jump(64, "TriMissile")
+    SKEL J 1 Bright A_FaceTarget
+    SKEL J 4 Bright A_FaceTarget
+    SKEL K 5 A_SkelMissile
+    SKEL K 5 A_FaceTarget
+	 Goto See
+   TriMissile:
+    SKEL J 1 Bright A_FaceTarget
+    SKEL J 4 Bright A_FaceTarget
+    SKEL K 5 A_SkelMissile
+    SKEL K 5 A_FaceTarget
+	SKEL K 5 A_SkelMissile
+	SKEL K 5 A_FaceTarget
+	SKEL K 5 A_SkelMissile
+	SKEL K 5 A_FaceTarget
+	 Goto See
+   JammedWeapon:
+    TNT1 A 0 A_TakeInventory("EMPJam")
+    SKEL J 1 Bright A_FaceTarget
+    SKEL J 4 Bright A_FaceTarget
+	SKEL K 15 A_Playsound("DRYFIRE")
+    SKEL K 3 A_Playsound("skeleton/sight")
+    SKEL K 30 A_FaceTarget
+	 Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+   Death.Decapitate:
+    TNT1 A 0 A_SpawnItemEx("RevenantHead", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	REVH A 15 A_Playsound("BLOODY")
+    REVH B 8 A_Scream
+    REVH C 4 
+	TNT1 AAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    REVH D 4 A_NoBlocking
+    REVH D -1
+    Stop
+	Death.DiskDamage:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TNT1 A 0 A_SpawnItemEx("RevenantTorso", 0, 0, 0, 0, 0, 10, 0)
+	DKEL E 15 A_Playsound("BLOODY")
+    DKEL F 8 A_Scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    DKEL G 4 
+    DKEL H 4 A_NoBlocking
+    DKEL I -1
+    Stop
+	}
+}
+
+Actor RevenantHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    XHE6 A 5
+    loop
+  }
+}
+
+Actor RevenantTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    SKEX F 5
+    loop
+  }
+}
+
+ACTOR NewHellKnight : HellKnight replaces HellKnight
+{
+Tag "Hell Knight"
+Painchance "Bleed", 255
+	States
+	{
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+	Melee:
+    BOS2 EF 6 A_FaceTarget
+    BOS2 G 5 A_CustomMeleeAttack(random(1,10)*6, "baron/melee")
+    Goto Melee2
+	Melee2:
+    BAS2 EF 6 A_FaceTarget
+    BAS2 G 5 A_CustomMeleeAttack(random(1,10)*6, "baron/melee")
+	Goto See
+	Missile:
+    BOS2 EF 6 A_FaceTarget
+    BOS2 G 5 A_BruisAttack
+	TNT1 A 0 A_Jump(128, "Missile2")
+    Goto See
+	Missile2:
+    BAS2 EF 6 A_FaceTarget
+    BAS2 G 5 A_BruisAttack
+	TNT1 A 0 A_Jump(128, "Missile")
+    Goto See
+	Death.Decapitate:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TNT1 A 0 A_SpawnItemEx("HellKnightHead", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 A 0 A_Playsound("BLOODY")
+    BOH2 A 15
+	TNT1 AAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BOH2 B 6 
+	TNT1 AAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BOH2 C 6
+	TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BOH2 D 6 A_NoBlocking
+    BOH2 D -1
+    Stop
+	Death.DiskDamage:
+    TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TNT1 A 0 A_SpawnItemEx("HellKnightTorso", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 A 0 A_Playsound("BLOODY")
+    BBO1 A 15
+    BBO1 B 6 A_Scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BBO1 C 6
+    BBO1 D 6 A_NoBlocking
+    BBO1 D -1
+    Stop
+	}
+}
+
+Actor HellKnightHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    HKHE A 5
+    loop
+  }
+}
+
+Actor HellKnightTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    BTO1 ABC 5
+    BTO1 D 5	
+    Goto DeadTorso
+	DeadTorso:
+    BTO1 D 5	
+    Loop
+  }
+}
+
+ACTOR NewBaronOfHell : BaronOfHell replaces BaronOfHell
+{
+Tag "Baron of Hell"
+Painchance "Bleed", 255
++MISSILEMORE
++MISSILEEVENMORE
+States
+	{
+   Melee:
+	TNT1 A 0 A_Jump(128, "Melee2")
+    BOSS EF 6 A_FaceTarget
+    BOSS G 5 A_CustomMeleeAttack(random(1,10)*6, "baron/melee")
+    Goto See
+   Melee2:
+    BOSS PQ 6 A_FaceTarget
+    BOSS R 5 A_CustomMeleeAttack(random(1,10)*8, "baron/melee")
+	Goto See
+   Missile:
+    TNT1 A 0 A_Jump(128, "Missile2")
+    BOSS EF 6 A_FaceTarget
+    BOSS G 5 A_BruisAttack
+	Goto See
+   Missile2:
+    BOSS P 6 A_FaceTarget
+    BOSS P 2 A_CustomMissile("BaronBall", 60)
+	BOSS Q 2 A_CustomMissile("BaronBall", 30)
+    BOSS R 2 A_CustomMissile("BaronBall", 10)
+	BOSS R 6
+	Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+   Death.Decapitate:
+	TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TNT1 A 0 A_SpawnItemEx("BaronHead", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 A 0 A_Playsound("BLOODY")
+    BADH A 15
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BADH B 6 
+	TNT1 AAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BADH C 6
+	TNT1 AAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BADH D 6 A_NoBlocking
+    BADH D -1
+    Stop
+   Death.DiskDamage:
+    TNT1 A 0 A_GiveToTarget("Joy")
+	TNT1 AAAAAA 0 A_CustomMissile ("CeilBloodLauncherLong", 0, 0, random (0, 360), 2, random (50, 130))
+	TNT1 AAAAAAAA 0 A_CustomMissile ("SuperWallRedBlood", 40, 0, random (0, 360), 2, random (-5, 5))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    TNT1 A 0 A_SpawnItemEx("BaronTorso", 0, 0, 0, 0, 0, 10, 0)
+	TNT1 A 0 A_Playsound("BLOODY")
+    BBO2 A 15
+    BBO2 B 6 A_Scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BBO2 C 6
+    BBO2 D 6 A_NoBlocking
+    BBO2 D -1
+    Stop
+	}
+}
+
+Actor BaronHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    XHE5 D 5
+    loop
+  }
+}
+
+Actor BaronTorso
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    BTO2 ABC 5
+    BTO2 D 5	
+    Goto DeadTorso
+	DeadTorso:
+    BTO2 D 5	
+    Loop
+  }
+}
+
+ACTOR NewArchvile : Archvile replaces Archvile
+{
+Tag "Arch Vile"
+  Painchance "Bleed", 255
+  PainChance 64
+  States
+  {
+  Melee:
+	TNT1 A 0 A_VileStart
+    VILE G 2 Bright A_FaceTarget
+    VILE H 3 Bright A_FaceTarget
+    VILE IJKLMN 3 Bright A_FaceTarget
+    VILE O 2 Bright A_CustomMissile("FTFire")
+    VILE P 2 Bright A_CustomMissile("FTFire")
+	VILE O 2 Bright A_CustomMissile("FTFire")
+    VILE P 2 Bright A_CustomMissile("FTFire")
+	VILE O 2 Bright A_CustomMissile("FTFire")
+    VILE P 2 Bright A_CustomMissile("FTFire")
+	VILE O 2 Bright A_CustomMissile("FTFire")
+    VILE P 2 Bright A_CustomMissile("FTFire")
+	VILE O 2 Bright A_CustomMissile("FTFire")
+    VILE P 2 Bright A_CustomMissile("FTFire")
+	VILE O 2 Bright A_CustomMissile("FTFire")
+    VILE P 2 Bright A_CustomMissile("FTFire")
+    Goto See
+	Missile:
+	TNT1 A 0 A_JumpIfCloser(196, "Melee")
+    VILE G 0 Bright A_VileStart
+	TNT1 A 0 A_JumpIfCloser(196, "Melee")
+    VILE G 10 Bright A_FaceTarget
+	TNT1 A 0 A_JumpIfCloser(196, "Melee")
+    VILE H 8 Bright A_VileTarget
+    VILE IJKLMN 8 Bright A_FaceTarget
+    VILE O 8 Bright A_VileAttack
+    VILE P 20 Bright
+    Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	}
+}
+Actor FTFire
+{
+  Radius 2
+  Height 4
+  Speed 16
+  Damage 1
+  Projectile
+  RenderStyle Add
+  DamageType Fire
+  +BLOODLESSIMPACT
+  Alpha 0.67
+  Scale 0.67
+  SeeSound "Flamethrower/Fire"
+  DeathSound "Flamethrower/Hit"
+  States
+  {
+  Spawn:
+    TNT1 A 2
+    FRFX ABCD 2 bright A_Explode(1, 8, 0)
+    TNT1 A 0 A_LowGravity
+    FRFX EFG 2 bright A_Explode(1, 16, 0)
+    FRFX HIJ 2 bright A_Explode(2, 32, 0)
+    FRFX KLM 2 bright A_Explode(1, 64, 0)
+    FRFX NO 2 bright
+    Stop
+  Death:
+    FRFX HIJ 2 bright A_Explode(2, 32, 0)
+    FRFX KLM 2 bright A_Explode(1, 64, 0)
+    FRFX NO 2 bright
+    Stop
+  }
+}
+
+ACTOR NewArachno :Arachnotron replaces Arachnotron
+{
+  Tag "Arachnotron"
+  Speed 18
+  PainChance "Stunner", 255
+  PainChance "EMP", 255
+  Painchance "Bleed", 255
+  DamageFactor "EMP", 5
+  DamageFactor "Stunner", 3
+  -DONTHARMSPECIES
+  -DONTHARMCLASS
+  -NOINFIGHTING
+  States
+  {
+  Missile:
+	TNT1 A 0 A_Jump(128,"RayAttack")
+    TNT1 A 0 A_Jump(64, "FastMissile")
+	BSPI A 20 Bright A_FaceTarget
+    BSPI G 2 Bright A_BspiAttack
+    BSPI H 2 Bright
+    BSPI H 1 Bright A_SpidRefire
+    Goto Missile+3
+	FastMissile:
+    BSPI A 10 Bright A_FaceTarget
+    BSPI G 1 Bright A_BspiAttack
+    BSPI H 1 Bright
+    BSPI H 1 Bright A_SpidRefire
+    Goto FastMissile+1
+	RayAttack:
+    BSPI A 20 Bright A_FaceTarget
+    BSPI GHGHGH 2 A_FaceTarget
+    BSPI G 1 A_CustomRailgun(95, 0, "Green", "White")
+    Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+	Pain.Stunner:
+	TNT1 A 0 A_Pain
+    BSPI I 70
+    BSPI I 70 A_Pain
+	BSPI I 35
+    Goto See+1
+	Death:
+    BSPI J 15 A_Scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BSPI K 4 A_NoBlocking
+	TNT1 AAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    BSPI LMNO 4
+    BSPI P -1 A_BossDeath
+    Stop
+	Death.DiskDamage:
+	TNT1 A 0 A_GiveToTarget("Joy", 1)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+	TNT1 A 0 A_SpawnItemEx("ArachnoBrainHead", 0, 0, 0, 0, 0, 10, 0)
+    XBSP A 10 A_Scream
+    XBSP B 4 A_NoBlocking
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
+    XBSP C 4
+    XBSP D -1 A_BossDeath
+    Stop
+	  }
+}
+
+Actor ArachnoBrainHead
+{
+  Radius 22
+  Height 11
+  States
+  {
+  Spawn:
+    NAHC EFG 5
+    goto StayDead
+	Staydead:
+	NAHC G 5
+	Loop
+  }
+}
+
+ACTOR SpideyPlasma : ArachnotronPlasma replaces ArachnotronPlasma
+{
+  Damage 1
+  -DONTHARMSPECIES
+  -DONTHARMCLASS
+  -NOINFIGHTING
+  States
+  {
+  Spawn:
+    APLS AB 5 Bright
+    Loop
+  Death:
+    APBX A 5 A_Explode(15, 32, 0)
+	APBX ABCDE 5 Bright
+    Stop
+  }
+}
+
+ACTOR NewCaco : Cacodemon replaces Cacodemon
+{
+Tag "Cacodemon"
+Painchance "Bleed", 255
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   Speed 12
+	States
+	{
+	Melee:
+	TNT1 A 0 A_PlaySound("demon/melee")
+    HEAD BC 3 A_FaceTarget
+    HEAD D 3  A_SargAttack
+    Goto See
+	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+	}
+}
+
+ACTOR NewPain : PainElemental replaces PainElemental
+{
+Tag "Pain Elemental"
+Painchance "Bleed", 255
+   +MISSILEMORE
+   +MISSILEEVENMORE
+   Health 600
+   States
+   {
+   Missile:
+    TNT1 A 0 A_Jump(128, "DoubleMissile", "Fireball")
+    PAIN D 5 A_FaceTarget
+    PAIN E 5 A_FaceTarget
+    PAIN F 4 Bright A_FaceTarget
+    PAIN F 1 Bright A_PainAttack
+    Goto See
+	DoubleMissile:
+    TNT1 A 0 A_Jump(128, "DoubleMissile")
+    PAIN D 5 A_FaceTarget
+    PAIN E 5 A_FaceTarget
+    PAIN F 4 Bright A_FaceTarget
+	TNT1 A 0 Bright A_PainAttack
+    PAIN F 1 Bright A_PainAttack
+    Goto See
+	Fireball:
+    PAIN D 5 A_FaceTarget
+    PAIN E 5 A_FaceTarget
+    PAIN F 4 Bright A_FaceTarget
+    PAIN F 1 Bright A_CustomMissile("PainFireBall")
+    Goto See
+	Death:
+    PAIN H 8 Bright
+    PAIN I 8 Bright A_Scream
+    PAIN JK 8 Bright
+	TNT1 A 0 Bright A_PainDie
+    PAIN L 8 Bright A_PainDie
+    PAIN M 8 Bright
+    Stop
+	  }
+}
+
+Actor PainFireBall
+{
+  Radius 6
+  Height 8
+  Speed 20
+  Damage 8
+  Projectile 
+  +RANDOMIZE
+  RenderStyle translucent
+  Alpha 1
+  SeeSound "fatso/attack"
+  DeathSound "skeleton/tracex"
+  States
+  {
+  Spawn:
+    MANF AB 4 
+    Loop
+  Death:
+    MISL B 8 A_Explode(12, 64, 0)
+    MISL C 6 
+    MISL D 4 
+    Stop
+  }
+}
+
+//CYBERDEMON
+
+ACTOR NewCyberdemon : Cyberdemon Replaces Cyberdemon
+{
+  Tag "Cyberdemon"
+  Painchance "Bleed", 255
+  PainChance "Stunner", 255
+  PainChance "EMP", 128
+  DamageFactor "EMP", 5
+  DamageFactor "DiskDamage", 0.1
+  DamageFactor "PlasmaDamage", 1.2
+  DamageFactor "Stunner", 3
+  DamageFactor "Obliterate", 5
+  States
+  {
+  	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+  Pain.Stunner:
+    CYBR G 70 A_Pain
+	CYBR G 70
+	CYBR G 35 A_Pain
+    Goto See
+  Missile:
+    TNT1 A 0 A_JumpIfCloser(196, "Flamethrower")
+    TNT1 A 0 A_Jump(150, "RailGun", "MachineGun", "PlasmaWeapon", "Grenades")
+    CYBR E 6 A_FaceTarget
+    CYBR F 6 A_CustomMissile("Rocket", 50, -40)
+    CYBR E 6 A_FaceTarget
+    CYBR F 6 A_CustomMissile("Rocket", 50, -40)
+    CYBR E 6 A_FaceTarget
+    CYBR F 6 A_CustomMissile("Rocket", 50, -40)
+    Goto See
+	Railgun: 
+    CYBR E 6 A_FaceTarget
+	CYBR EFEF 2
+    CYBR F 12 A_CustomRailgun(100, 0, "Red", "White")
+	CYBR E 6 A_FaceTarget
+    CYBR F 12 A_CustomRailgun(100, 0, "Red", "White")
+	CYBR E 6 A_FaceTarget
+    CYBR F 12 A_CustomRailgun(100, 0, "Red", "White")
+    Goto see
+	MachineGun:
+    CYBR E 6 A_FaceTarget
+	TNT1 A 0 A_Playsound("MG60FR")
+    CYBR F 2 Bright A_CPosAttack
+	TNT1 A 0 A_Playsound("MG60FR")
+    CYBR E 2 Bright A_CPosAttack
+	CYBR F 1 A_CPosRefire
+    Goto MachineGun+1
+	PlasmaWeapon:
+    CYBR E 6 A_FaceTarget
+    CYBR FE 2 Bright A_CustomMissile("ArachnotronPlasma", 50, -30)
+    CYBR F 1 A_SpidRefire
+    Goto PlasmaWeapon+1
+	Grenades:
+    CYBR E 6 A_FaceTarget
+	CYBR FE 2
+	TNT1 A 0 A_CustomMissile("Grenade1", 50, 1, 1, 0)
+    TNT1 A 0 A_CustomMissile("Grenade2", 50, 3, 2, 0)
+	TNT1 A 0 A_CustomMissile("Grenade3", 50, 5, 3, 0)
+	TNT1 A 0 A_CustomMissile("Grenade4", 50, 2, 0, 0)
+    CYBR F 1
+    Goto See
+  Flamethrower:
+    CYBR E 6 A_FaceTarget
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR E 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR E 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+	CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR E 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR E 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+	CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR E 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR E 2 A_CustomMissile("FTFire", 50, -25)
+    CYBR F 2 A_CustomMissile("FTFire", 50, -25)
+    Goto See
+	  }
+}
+	ACTOR Grenade1
+{
+  Radius 11
+  Height 8
+  Speed 30
+  Damage 10
+  Projectile
+  +FORCERADIUSDMG
+  +RANDOMIZE
+  +DEHEXPLOSION
+  +ROCKETTRAIL
+  -NOGRAVITY
+  Gravity 0.4
+  Decal Scorch
+  SeeSound "M79FIRE1"
+  DeathSound "EXROUNDS"
+  Obituary "%o Was Thumped by %k's M79."
+  States
+  {
+  Spawn:
+    GRND A 1 bright
+    loop
+  Death:
+    MISL B 0 bright A_ChangeFlag("NOGRAVITY",1)
+    MISL B 0 bright A_PlaySound("EXROUNDS")
+    MISL B 8 bright A_Explode(20,128,1)
+    MISL C 6 bright
+    MISL D 4 bright
+    stop
+  }
+}
+
+ACTOR Grenade2: Grenade1
+{speed 28 gravity 0.38}
+	
+ACTOR Grenade3: Grenade2
+{speed 26 gravity 0.36}
+
+ACTOR Grenade4: Grenade3
+{speed 24 gravity 0.34}
+
+
+ACTOR NewMastermind : SpiderMastermind replaces SpiderMastermind
+{
+Tag "Spider Mastermind"
+Painchance "Bleed", 255
+  PainChance "Stunner", 255
+  PainChance "EMP", 255
+  DamageFactor "EMP", 5
+  DamageFactor "PlasmaDamage", 1.2
+  DamageFactor "DiskDamage", 0.1
+  DamageFactor "Stunner", 3
+  DamageFactor "Obliterate", 8
+  States
+  {
+  Pain.Stunner:
+    SPID I 70 A_Pain
+	SPID I 70
+	SPID I 35 A_Pain
+    Goto See
+	Missile:
+	TNT1 A 0 A_Jump(128, "FasterChaingun")
+    SPID A 10 Bright A_FaceTarget
+    SPID G 2 Bright A_SPosAttackUseAtkSound
+    SPID H 2 Bright A_SPosAttackUseAtkSound
+    SPID H 1 Bright A_SpidRefire
+    Goto Missile+2
+	FasterChaingun:
+    SPID A 10 Bright A_FaceTarget
+    SPID G 1 Bright A_SPosAttackUseAtkSound
+    SPID H 1 Bright A_SPosAttackUseAtkSound
+    SPID H 1 Bright A_SpidRefire
+    Goto FasterChaingun+1
+	  }
+}
+
+ACTOR NewFatso : Fatso Replaces Fatso
+{
+  Tag "Mancubus"
+  Painchance "Bleed", 255
+  PainChance "Stunner", 255
+  PainChance "EMP", 255
+  DamageFactor "EMP", 5
+  States
+  {
+  	Pain.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Pain
+	Death.Bleed:
+	TNT1 A 0 A_Playsound("FLESHHIT")
+	Goto Death
+    Missile:
+	TNT1 A 0 A_Jump(64, "Missile2")
+    FATT G 20 A_FatRaise
+    FATT H 10 Bright A_FatAttack1
+    FATT IG 5
+    FATT H 10 Bright A_FatAttack2
+    FATT IG 5
+    FATT H 10 Bright A_FatAttack3
+    FATT IG 5
+    Goto See
+	Missile2:
+    FATT G 20 A_FatRaise
+    FATT H 2 Bright A_FatAttack1
+    FATT IG 1
+    FATT H 2 Bright A_FatAttack2
+    FATT IG 1
+    FATT H 2 Bright A_FatAttack3
+    FATT IG 1
+	FATT H 2 Bright A_FatAttack1
+    FATT IG 1
+    FATT H 2 Bright A_FatAttack2
+    FATT IG 1
+    FATT H 2 Bright A_FatAttack3
+    FATT IG 1
+	FATT H 2 Bright A_FatAttack1
+    FATT IG 1
+    FATT H 2 Bright A_FatAttack2
+    FATT IG 1
+    FATT H 2 Bright A_FatAttack3
+    FATT IG 1
+	Goto See
+	}
+}
+
+Actor GiveUpCounter : Inventory
+{Inventory.Maxamount 99}
