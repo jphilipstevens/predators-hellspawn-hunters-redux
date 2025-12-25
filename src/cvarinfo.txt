@@ -4,3 +4,7 @@ user float cl_step_volmul = 7.0;
 user float cl_step_delaymul = 1.0;
 user noarchive int strtoval = 0;
 user noarchive float strtofloat = 0.0;
+
+// Predator Cloak Settings
+user bool pred_infinite_cloak = false;
+user int pred_cloak_strength = 80;

@@ -120,22 +120,42 @@ Else
 
 Script 998 (VOID)
 {
-	int invx = CheckInventory("xxPowerInvisibility");
-	
+	int invx = CheckInventory("CloakOn");
+	int strength = GetCVar("pred_cloak_strength");
+
   If(invx > 0)
    {
    SetResultValue(1);
 		TakeInventory ("xxPowerInvisibility", 1);
+		TakeInventory ("xxPowerInvisibility90", 1);
+		TakeInventory ("xxPowerInvisibility95", 1);
+		TakeInventory ("xxPowerInvisibility99", 1);
 		TakeInventory ("CloakOn", 1);
 		ActivatorSound ("cloakoff", 120);
 	}
-	Else	
+	Else
 	{
 	SetResultValue(0);
-		GiveInventory ("xxPowerInvisibility", 1);
+		// Give the appropriate invisibility power based on strength setting
+		If (strength >= 99)
+		{
+			GiveInventory ("xxPowerInvisibility99", 1);
+		}
+		Else If (strength >= 95)
+		{
+			GiveInventory ("xxPowerInvisibility95", 1);
+		}
+		Else If (strength >= 90)
+		{
+			GiveInventory ("xxPowerInvisibility90", 1);
+		}
+		Else
+		{
+			GiveInventory ("xxPowerInvisibility", 1);
+		}
 		GiveInventory ("CloakOn", 1);
 		ActivatorSound("cloakon", 120);
-	}	
+	}
 }
 
 Script 999 (VOID)

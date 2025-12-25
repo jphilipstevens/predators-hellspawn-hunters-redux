@@ -8,4 +8,5 @@ gameinfo
    weaponslot = 6, "PredatorDisk"
    weaponslot = 7, "Netgun", "AssaultRailgun"
    // add other slots here...
+   AddEventHandlers = "PredInvisHandler"
  }

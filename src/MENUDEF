@@ -1,0 +1,22 @@
+OptionValue "CloakStrength"
+{
+	80, "80% (Default)"
+	90, "90% (Stealthy)"
+	95, "95% (Very Stealthy)"
+	99, "99% (Nearly Perfect)"
+}
+
+OptionMenu "PredatorOptions"
+{
+	Title "PREDATOR OPTIONS"
+	StaticText ""
+	StaticText "Cloak Settings", 1
+	Option "Infinite Cloak Energy", "pred_infinite_cloak", "OnOff"
+	Option "Cloak Stealth Strength", "pred_cloak_strength", "CloakStrength"
+	StaticText ""
+}
+
+OptionMenu "OptionsMenu"
+{
+	Submenu "Predator Options", "PredatorOptions"
+}

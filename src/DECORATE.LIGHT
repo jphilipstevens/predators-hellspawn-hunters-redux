@@ -53,12 +53,16 @@ ACTOR LightPredator : PlayerPawn
     PRED A 70 A_GiveInventory("Energy", 1)
 	Goto Idle
    StealthOn:
+      TNT1 A 0 A_JumpIf(GetCVar("pred_infinite_cloak"), "StealthOnInfinite")
       PRED A 35 A_TakeInventory("Energy", 1)
       TNT1 A 0 A_JumpIfInventory("Energy", 1, "StealthCheck")
       TNT1 A 0 A_TakeInventory("xxPowerInvisibility", 1)
       TNT1 A 0 A_TakeInventory("CloakOn", 1)
 	  TNT1 A 0 A_Playsound("cloakoff")
       Goto Idle
+   StealthOnInfinite:
+      PRED A 35 A_GiveInventory("Energy", 1)
+      Goto StealthCheck
   Pain:
     PRED G 4 
     PRED G 4 A_Playsound("PRHURT")

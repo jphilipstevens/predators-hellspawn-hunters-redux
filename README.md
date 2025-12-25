@@ -14,6 +14,13 @@ This is my personal fork of the original Predators Hellspawn Hunters mod, create
 
 This mod would not exist without jdredalert's excellent work. Please visit the original thread to show support and see the original version of the mod.
 
+### Additional Credits
+
+**Alternate Partial Invisibility Mechanics** - Based on TehRealSalt's "Alternate take on Partial Invisibility"
+**Forum Thread:** https://forum.zdoom.org/viewtopic.php?f=43&t=70683
+
+The improved cloaking behavior uses TehRealSalt's decoy-based invisibility system, which creates a more tactical and power-fantasy friendly stealth experience.
+
 ## Description
 
 Predators Hellspawn Hunters is a gameplay mod that lets you play as a Predator (Yautja) from the Predator franchise. Hunt demons across the Doom universe with iconic Predator weapons and abilities including:
@@ -24,12 +31,22 @@ Predators Hellspawn Hunters is a gameplay mod that lets you play as a Predator (
 - **Vision Modes** - Track your targets through walls
 - And more weapons and gadgets from the films
 
+## Changes from Original
+
+### Improved Cloaking Mechanics
+Integrated TehRealSalt's alternate invisibility system that replaces the vanilla partial invisibility behavior. Instead of enemies having inaccurate aim, the cloak now creates a "decoy" target at your last known position when you make noise (attacking or taking damage). This allows for more tactical stealth gameplay:
+
+- **Tactical Distraction** - Make noise to redirect enemies to a decoy position, then attack from a different angle
+- **True Stealth** - Sneak past enemies undetected if you remain silent
+- **Power Fantasy** - Feels more like the Predator's iconic cloaking from the films, rather than just making enemies miss more often
+
+This creates a more engaging stealth experience that rewards tactical positioning and timing.
+
 ## TODO - Planned Changes
 
 Features and modifications I plan to implement:
 
 1. **Optional Energy-Free Cloaking** - Add a setting to disable energy drain on the cloaking device for a more power fantasy-focused gameplay experience
-2. **Movie-Accurate Cloak Dynamics** - Update the cloaking mechanics to more closely match the visual effects and behavior seen in the Predator films
 
 ## Installation
 

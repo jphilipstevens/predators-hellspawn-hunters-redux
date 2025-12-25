@@ -25,7 +25,31 @@ ACTOR XXPowerInvisibility : PowerInvisibility
 {
   +SHADOW
   Powerup.Duration 0x7FFFFFF
-  Powerup.Strength 80
+  Powerup.Strength 100
+  Powerup.Mode "Fuzzy"
+}
+
+ACTOR XXPowerInvisibility90 : PowerInvisibility
+{
+  +SHADOW
+  Powerup.Duration 0x7FFFFFF
+  Powerup.Strength 100
+  Powerup.Mode "Fuzzy"
+}
+
+ACTOR XXPowerInvisibility95 : PowerInvisibility
+{
+  +SHADOW
+  Powerup.Duration 0x7FFFFFF
+  Powerup.Strength 100
+  Powerup.Mode "Fuzzy"
+}
+
+ACTOR XXPowerInvisibility99 : PowerInvisibility
+{
+  +SHADOW
+  Powerup.Duration 0x7FFFFFF
+  Powerup.Strength 100
   Powerup.Mode "Fuzzy"
 }
 
