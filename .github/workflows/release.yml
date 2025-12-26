@@ -1,0 +1,78 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper versioning
+
+      - name: Install ACC (ACS Compiler)
+        run: |
+          # Download and install ACC compiler
+          wget https://github.com/ZDoom/acc/releases/download/1.59/acc-1.59-linux.tar.gz
+          tar -xzf acc-1.59-linux.tar.gz
+          chmod +x acc
+          sudo mv acc /usr/local/bin/
+
+      - name: Compile ACS scripts
+        run: |
+          echo "Compiling ACS scripts..."
+          cd src
+
+          # Compile all .acs files to .o (compiled ACS bytecode)
+          for acs_file in *.acs; do
+            if [ -f "$acs_file" ]; then
+              echo "Compiling $acs_file..."
+              acc "$acs_file" || echo "Warning: Failed to compile $acs_file"
+            fi
+          done
+
+          cd ..
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        id: semantic
+        with:
+          semantic_version: 23
+          extra_plugins: |
+            @semantic-release/changelog@6.0.3
+            @semantic-release/git@10.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create PK3 package
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          VERSION="${{ steps.semantic.outputs.new_release_version }}"
+          PK3_NAME="predators-hellspawn-hunters-redux-${VERSION}.pk3"
+
+          echo "Creating PK3 package: $PK3_NAME"
+
+          # PK3 files are just ZIP files with .pk3 extension
+          cd src
+          zip -r "../$PK3_NAME" .
+          cd ..
+
+          echo "PK3_NAME=$PK3_NAME" >> $GITHUB_ENV
+
+      - name: Upload Release Asset
+        if: steps.semantic.outputs.new_release_published == 'true'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.semantic.outputs.new_release_upload_url }}
+          asset_path: ./${{ env.PK3_NAME }}
+          asset_name: ${{ env.PK3_NAME }}
+          asset_content_type: application/zip
