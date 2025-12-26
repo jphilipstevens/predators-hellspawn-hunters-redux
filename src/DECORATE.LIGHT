@@ -19,12 +19,14 @@ ACTOR LightPredator : PlayerPawn
   Player.StartItem "LightPredatorTag"
   Player.StartItem "LightPlayer"
   Player.StartItem "NewRocketAmmo", 20
+  Player.StartItem "Accumulator"
   Player.WeaponSlot 1, WristBlade
   //Player.WeaponSlot 2,
   Player.WeaponSlot 3, ThrowingDaggers
   Player.WeaponSlot 4, Speargun
   Player.WeaponSlot 5, PlasmaCaster
   Player.WeaponSlot 6, PredatorDisk
+  Player.WeaponSlot 8, Accumulator
   
 
   States

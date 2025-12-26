@@ -19,6 +19,7 @@ ACTOR PredatorHunter : PlayerPawn
   Player.StartItem "PredatorHunterTag"
   Player.StartItem "HunterPlayer"
   Player.StartItem "NewRocketAmmo", 20
+  Player.StartItem "Accumulator"
   Player.WeaponSlot 1, WristBlade
   Player.WeaponSlot 2, Spear
   Player.WeaponSlot 3, EMPPistol
@@ -26,6 +27,7 @@ ACTOR PredatorHunter : PlayerPawn
   Player.WeaponSlot 5, PlasmaCaster
   Player.WeaponSlot 6, PredatorDisk
   Player.WeaponSlot 7, NetGun
+  Player.WeaponSlot 8, Accumulator
   
 
   States

@@ -137,7 +137,7 @@ Inventory.RestrictedTo LightPredator
 +INVENTORY.RESTRICTABSOLUTELY
 }
 
-ACTOR Energy : Inventory
+ACTOR Energy : Ammo
 {
   +INVENTORY.INVBAR
   +INVENTORY.PERSISTENTPOWER

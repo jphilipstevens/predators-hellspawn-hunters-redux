@@ -1,0 +1,103 @@
+// ==============================================================================
+// ACCUMULATOR - Energy Regeneration Weapon
+// Ported from AVP20_Final_WIP
+// ==============================================================================
+
+actor HealthPointCount : Inventory
+{
+    Inventory.MaxAmount 300
+}
+
+actor SoundSTART : Inventory
+{
+    Inventory.MaxAmount 1
+}
+
+actor Accumulator : Weapon
+{
+    Game Doom
+    +INVENTORY.UNTOSSABLE
+    +INVENTORY.UNDROPPABLE
+    Weapon.Kickback 0
+    Weapon.AmmoUse1 0
+    Weapon.AmmoUse2 0
+    Weapon.AmmoType1 "Energy"
+    Weapon.AmmoType2 "Energy"
+    Weapon.SelectionOrder 7000  // Low priority (high number)
+    Weapon.SlotNumber 8
+    weapon.bobrangeX 0.4
+    weapon.bobrangeY 0.4
+    Inventory.PickupMessage "Energy Accumulator - Passive Recharging Device"
+    Obituary "$OB_MPCHAINSAW"
+    +WEAPON.NOALERT
+    -WEAPON.DONTBOB
+
+    States
+    {
+    Ready:
+        TNT1 A 0 A_JumpIfInventory ("PowerStrength", 1, "Ready2")
+        TROF A 1 A_WeaponReady
+        Goto PreFire
+
+    Ready2:
+        TROF A 1 A_WeaponReady
+        Goto Fire
+
+    EnergyFull:
+        TROF A 1 A_PlaySound ("/predator/TRALOOPS")
+        TNT1 A 0 A_TakeInventory("SoundSTART", 99)
+        Goto DeselectPre
+
+    DeselectPre:
+        TROF A 0 A_StopSound (1)
+        TROF BCD 1
+        TROF ABCD 2
+        Goto Deselect
+
+    Deselect:
+        TROF A 0 A_StopSound (1)
+        TROF A 1 A_Lower
+        NULL AAA 0 A_Lower
+        Loop
+
+    Select:
+        TNT1 A 0 A_PlaySound ("TRAON")
+        TROF A 1 A_Raise
+        NULL AAA 0 A_Raise
+        Loop
+
+    PreFire:
+        TNT1 A 0 A_JumpIfInventory("SoundSTART", 1, "Fire")
+        TNT1 A 0 A_GiveInventory("SoundSTART", 1)
+        TNT1 A 0 A_PlaySound ("/predator/TRALOOP", 1, 1, 1)
+        Goto Fire
+
+    Fire:
+        TROF A 0 A_PlaySound ("/predator/TRALOOP", 1, 1, 1)
+        TROF ABCD 2
+
+    Charge:
+        TROF A 1 A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF E 1 BRIGHT A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF B 1 A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF F 1 BRIGHT A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF C 1 A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF G 1 BRIGHT A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF D 1 A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF H 1 BRIGHT A_GiveInventory ("Energy", 1)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF A 1 A_WeaponReady
+        Goto Charge
+
+    Spawn:
+        LAUN A -1
+        Stop
+    }
+}

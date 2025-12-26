@@ -1,0 +1,71 @@
+// ==============================================================================
+// TEXTURES - Composite Sprite Definitions
+// Predators: Hellspawn Hunters Redux
+// ==============================================================================
+
+// Accumulator (Energy Siphon) Weapon Sprites
+// Uses ACCUM patch composites for smooth animation
+
+Sprite TROFA0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM1, 0, 0
+}
+
+Sprite TROFB0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM2, 0, 0
+}
+
+Sprite TROFC0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM3, 0, 0
+}
+
+Sprite TROFD0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM4, 0, 0
+}
+
+Sprite TROFE0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM5, 0, 0
+}
+
+Sprite TROFF0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM6, 0, 0
+}
+
+Sprite TROFG0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM7, 0, 0
+}
+
+Sprite TROFH0, 260, 203
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -155, -128
+	Patch ACCUM8, 0, 0
+}

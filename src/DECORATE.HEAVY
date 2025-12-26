@@ -19,12 +19,14 @@ ACTOR HeavyPredator : PlayerPawn
   Player.StartItem "HeavyPredatorTag"
   Player.StartItem "HeavyPlayer"
   Player.StartItem "Harpoons", 50
+  Player.StartItem "Accumulator"
   Player.WeaponSlot 1, DoubleBlade
   Player.WeaponSlot 2, Axe
   Player.WeaponSlot 3, WristMissileLauncher
   Player.WeaponSlot 4, Sword
   Player.WeaponSlot 5, PlasmaCaster
   Player.WeaponSlot 6, PredatorDisk
+  Player.WeaponSlot 8, Accumulator
 
   States
   {

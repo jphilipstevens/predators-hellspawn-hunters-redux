@@ -19,6 +19,7 @@ ACTOR AssaultPredator : PlayerPawn
   Player.StartItem "AssaultPredatorTag"
   Player.StartItem "AssaultPlayer"
   Player.StartItem "Harpoons", 50
+  Player.StartItem "Accumulator"
   Player.WeaponSlot 1, WristBlade
   Player.WeaponSlot 2, Whip
   Player.WeaponSlot 3, WristMissileLauncher
@@ -26,6 +27,7 @@ ACTOR AssaultPredator : PlayerPawn
   Player.WeaponSlot 5, DoubleCaster
   Player.WeaponSlot 6, PredatorDisk
   Player.WeaponSlot 7, AssaultRailgun
+  Player.WeaponSlot 8, Accumulator
   States
   {
   Spawn:
