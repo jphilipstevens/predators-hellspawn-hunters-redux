@@ -25,32 +25,40 @@ ACTOR XXPowerInvisibility : PowerInvisibility
 {
   +SHADOW
   Powerup.Duration 0x7FFFFFF
-  Powerup.Strength 100
+  Powerup.Strength 80
   Powerup.Mode "Fuzzy"
+  +GHOST
+  +CANTSEEK
 }
 
 ACTOR XXPowerInvisibility90 : PowerInvisibility
 {
   +SHADOW
   Powerup.Duration 0x7FFFFFF
-  Powerup.Strength 100
+  Powerup.Strength 90
   Powerup.Mode "Fuzzy"
+  +GHOST
+  +CANTSEEK
 }
 
 ACTOR XXPowerInvisibility95 : PowerInvisibility
 {
   +SHADOW
   Powerup.Duration 0x7FFFFFF
-  Powerup.Strength 100
+  Powerup.Strength 95
   Powerup.Mode "Fuzzy"
+  +GHOST
+  +CANTSEEK
 }
 
 ACTOR XXPowerInvisibility99 : PowerInvisibility
 {
   +SHADOW
   Powerup.Duration 0x7FFFFFF
-  Powerup.Strength 100
+  Powerup.Strength 99
   Powerup.Mode "Fuzzy"
+  +GHOST
+  +CANTSEEK
 }
 
 actor CloakOn : Inventory
