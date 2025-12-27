@@ -69,3 +69,48 @@ Sprite TROFH0, 260, 203
 	Offset -155, -128
 	Patch ACCUM8, 0, 0
 }
+
+// ==============================================================================
+// Smart Disk Weapon Sprites
+// Uses SDISK patch composites from AVP20
+// ==============================================================================
+
+Sprite PDSAA0, 131, 108
+{
+	XScale 1.300
+	YScale 1.400
+	Offset -249, -132
+	Patch SDISK1, -5, -5
+}
+
+Sprite PDSAB0, 131, 108
+{
+	XScale 1.300
+	YScale 1.400
+	Offset -216, -142
+	Patch SDISK1, -5, -5
+}
+
+Sprite PDSAC0, 137, 113
+{
+	XScale 1.300
+	YScale 1.400
+	Offset -188, -153
+	Patch SDISK2, 0, 0
+}
+
+Sprite PDSAD0, 150, 113
+{
+	XScale 1.300
+	YScale 1.400
+	Offset -140, -178
+	Patch SDISK3, 0, 0
+}
+
+Sprite PDSAE0, 150, 113
+{
+	XScale 1.300
+	YScale 1.400
+	Offset -110, -200
+	Patch SDISK4, 0, 0
+}
