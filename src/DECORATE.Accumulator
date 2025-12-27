@@ -35,66 +35,60 @@ actor Accumulator : Weapon
     States
     {
     Ready:
-        TNT1 A 0 A_JumpIfInventory ("PowerStrength", 1, "Ready2")
-        TROF A 1 A_WeaponReady
-        Goto PreFire
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "AlreadyFull")
+        TNT1 A 0 A_JumpIfInventory("SoundSTART", 1, "Fire")
+        TNT1 A 0 A_GiveInventory("SoundSTART", 1)
+        TNT1 A 0 A_PlaySound ("TRAON")
+        TNT1 A 0 A_PlaySound ("/predator/TRALOOP", 1, 1, 1)
+        TROF ABCD 2
+        Goto Fire
 
-    Ready2:
+    AlreadyFull:
+        TNT1 A 0 A_TakeInventory("SoundSTART", 99)
         TROF A 1 A_WeaponReady
+        Loop
+
+    Fire:
+        TROF A 1 A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF E 1 BRIGHT A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF B 1 A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF F 1 BRIGHT A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF C 1 A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF G 1 BRIGHT A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF D 1 A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        TROF H 1 BRIGHT A_GiveInventory ("Energy", 2)
+        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
+        Loop
+
+    Charge:
         Goto Fire
 
     EnergyFull:
-        TROF A 1 A_PlaySound ("/predator/TRALOOPS")
+        TNT1 A 0 A_PlaySound ("/predator/TRALOOPS")
+        TNT1 A 0 A_StopSound (1)
         TNT1 A 0 A_TakeInventory("SoundSTART", 99)
-        Goto DeselectPre
-
-    DeselectPre:
-        TROF A 0 A_StopSound (1)
-        TROF BCD 1
-        TROF ABCD 2
-        Goto Deselect
+        TROF DCBA 2
+        TNT1 A 1 A_Lower
+        Wait
 
     Deselect:
-        TROF A 0 A_StopSound (1)
+        TNT1 A 0 A_StopSound (1)
+        TNT1 A 0 A_TakeInventory("SoundSTART", 99)
         TROF A 1 A_Lower
         NULL AAA 0 A_Lower
         Loop
 
     Select:
-        TNT1 A 0 A_PlaySound ("TRAON")
         TROF A 1 A_Raise
         NULL AAA 0 A_Raise
         Loop
-
-    PreFire:
-        TNT1 A 0 A_JumpIfInventory("SoundSTART", 1, "Fire")
-        TNT1 A 0 A_GiveInventory("SoundSTART", 1)
-        TNT1 A 0 A_PlaySound ("/predator/TRALOOP", 1, 1, 1)
-        Goto Fire
-
-    Fire:
-        TROF A 0 A_PlaySound ("/predator/TRALOOP", 1, 1, 1)
-        TROF ABCD 2
-
-    Charge:
-        TROF A 1 A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF E 1 BRIGHT A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF B 1 A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF F 1 BRIGHT A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF C 1 A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF G 1 BRIGHT A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF D 1 A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF H 1 BRIGHT A_GiveInventory ("Energy", 1)
-        TNT1 A 0 A_JumpIfInventory("Energy", 500, "EnergyFull")
-        TROF A 1 A_WeaponReady
-        Goto Charge
 
     Spawn:
         LAUN A -1
