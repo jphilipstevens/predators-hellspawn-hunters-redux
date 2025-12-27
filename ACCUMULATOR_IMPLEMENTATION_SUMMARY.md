@@ -1,14 +1,22 @@
 # Accumulator (Energy Siphon) Implementation Summary
 
 **Implementation Date:** December 26, 2025
-**Status:** ✅ COMPLETE - Ready for Testing
+**Status:** ⚠️ FUNCTIONAL - Auto-switch needs refinement
 **Based on:** IMPLEMENTATION_PLAN_1_ENERGY_SIPHON.md
 
 ---
 
 ## What Was Implemented
 
-The **Accumulator** is a passive energy regeneration weapon that allows predators to recharge their energy supply. When equipped, it automatically generates energy over time with visual and audio feedback, then auto-switches to the previous weapon when energy reaches maximum (500).
+The **Accumulator** is a passive energy regeneration weapon that allows predators to recharge their energy supply. When equipped, it automatically generates energy over time with visual and audio feedback. The weapon currently charges energy successfully but has a minor issue with the auto-switch behavior that needs to be addressed.
+
+**Current Behavior:**
+- ✅ Weapon raises smoothly (ABCD animation)
+- ✅ Charging loop works perfectly (generates 16 energy per cycle)
+- ✅ Visual feedback (bright frames E, F, G, H pulse during charge)
+- ✅ Audio feedback (TRALOOP loops, TRALOOPS plays on completion)
+- ✅ Stops charging when energy reaches 500
+- ⚠️ Auto-switch animation needs refinement (weapon lowers but doesn't complete switch to previous weapon)
 
 ---
 
@@ -56,12 +64,13 @@ Created complete weapon actor with:
   - Weapon bob: 0.4 (X and Y)
 
 - **States:**
-  - Ready → PreFire → Fire → Charge (loop)
-  - Generates 8 energy per animation cycle
+  - Ready → Fire (charge loop)
+  - Generates 16 energy per animation cycle (doubled from original plan)
   - Bright frames (E, F, G, H) for visual feedback
-  - Auto-switches to previous weapon when energy = 500
+  - EnergyFull state plays completion sequence (needs auto-switch fix)
   - Sound loops during charging
   - Stops sound on deselect
+  - AlreadyFull state prevents animation when energy is maxed
 
 ---
 
@@ -79,7 +88,24 @@ Created complete weapon actor with:
 
 Note: `TRAON` was already registered (line 84)
 
-### 2. Player Class Files
+### 2. DECORATE.Predator
+**File:** `src/DECORATE.Predator`
+
+**Line 140 modified:**
+Changed `Energy` actor from `Inventory` to `Ammo` inheritance (required for weapon ammo types):
+```decorate
+ACTOR Energy : Ammo
+{
+  +INVENTORY.INVBAR
+  +INVENTORY.PERSISTENTPOWER
+  Inventory.InterHubAmount 1000
+  Inventory.Amount 1000
+  Inventory.MaxAmount 1000
+  Inventory.Icon "CELLA0"
+}
+```
+
+### 3. Player Class Files
 
 #### DECORATE.LIGHT
 **Lines 22 and 29 added:**
@@ -115,30 +141,46 @@ Player.WeaponSlot 8, Accumulator
 
 ### Energy Regeneration Mechanic
 
-**Charge Rate:** 8 energy per animation cycle
+**Charge Rate:** 16 energy per animation cycle (2x faster than original plan)
 - 8 frames @ 1 tic each = 8 tics per cycle (~0.23 seconds)
-- Full charge (0→500): ~62.5 cycles = ~14.4 seconds
+- Full charge (0→500): ~31.25 cycles = ~7.2 seconds
 
 **Charge Loop:**
 ```
-TROF A: +1 energy
-TROF E (BRIGHT): +1 energy
-TROF B: +1 energy
-TROF F (BRIGHT): +1 energy
-TROF C: +1 energy
-TROF G (BRIGHT): +1 energy
-TROF D: +1 energy
-TROF H (BRIGHT): +1 energy
-→ Total: 8 energy per cycle
+TROF A: +2 energy
+TROF E (BRIGHT): +2 energy
+TROF B: +2 energy
+TROF F (BRIGHT): +2 energy
+TROF C: +2 energy
+TROF G (BRIGHT): +2 energy
+TROF D: +2 energy
+TROF H (BRIGHT): +2 energy
+→ Total: 16 energy per cycle
 ```
 
-### Auto-Switch Behavior
+### Animation Flow
 
-When energy reaches 500:
+**On Weapon Select (when energy < 500):**
+1. Plays TRAON activation sound
+2. Starts TRALOOP charging loop sound
+3. Raises weapon (TROF A→B→C→D @ 2 tics each)
+4. Begins charging loop
+
+**During Charging:**
+- Continuous spin animation (A→E→B→F→C→G→D→H→repeat)
+- Bright frames (E, F, G, H) create pulsing glow effect
+- Energy increases by 2 per frame
+
+**When Energy Reaches 500:**
 1. Plays completion sound ("/predator/TRALOOPS")
 2. Stops charging loop sound
-3. Plays deselect animation (TROF BCD @ 1 tic, ABCD @ 2 tics)
-4. Switches to previous weapon
+3. Lowers weapon (TROF D→C→B→A @ 2 tics each)
+4. ⚠️ **KNOWN ISSUE:** Auto-switch to previous weapon not completing properly
+
+**When Energy Already Full:**
+- Weapon stays in ready position without animation
+- No charging sounds play
+- User can manually switch weapons normally
 
 ### Visual Feedback
 
@@ -174,11 +216,12 @@ Before marking as production-ready, test:
 - [ ] Sound stops when switching weapons manually
 - [ ] Sound stops on player death
 
-### ✅ Auto-Switch
-- [ ] Weapon auto-switches when energy = 500
-- [ ] Switches to correct previous weapon
-- [ ] Completion sound plays before switch
-- [ ] Deselect animation plays
+### ⚠️ Auto-Switch (Known Issue)
+- [x] Completion sound plays when energy = 500
+- [x] Deselect animation plays (D→C→B→A)
+- [ ] **NEEDS FIX:** Weapon doesn't complete switch to previous weapon after lowering
+  - Current behavior: Weapon lowers then raises again
+  - Expected behavior: Weapon should switch to previously equipped weapon
 
 ### ✅ Edge Cases
 - [ ] Works with all 4 predator classes (Light, Hunter, Heavy, Assault)
@@ -196,10 +239,10 @@ Before marking as production-ready, test:
 - [ ] Works at different screen resolutions
 
 ### ✅ Balance
-- [ ] Charge rate feels appropriate (~14 seconds full)
-- [ ] Not too fast (doesn't trivialize energy management)
-- [ ] Not too slow (not frustrating to use)
-- [ ] Tactical weapon switching encouraged
+- [x] Charge rate feels appropriate (~7.2 seconds full at 16/cycle)
+- [x] Fast enough to be useful in combat
+- [x] Encourages tactical weapon switching during downtime
+- [ ] May need adjustment based on gameplay testing
 
 ---
 
@@ -253,9 +296,53 @@ src/
 
 ---
 
+## Known Issues
+
+### Auto-Switch Not Completing
+
+**Problem:** When energy reaches 500, the weapon plays the lower animation (D→C→B→A) but then raises the Accumulator back up instead of switching to the previous weapon.
+
+**Current Implementation (EnergyFull state):**
+```decorate
+EnergyFull:
+    TNT1 A 0 A_PlaySound ("/predator/TRALOOPS")
+    TNT1 A 0 A_StopSound (1)
+    TNT1 A 0 A_TakeInventory("SoundSTART", 99)
+    TROF D 2
+    TROF C 2
+    TROF B 2
+    TROF A 2
+    TNT1 A 0 A_Lower
+    TNT1 A 0 A_Lower
+    TNT1 A 0 A_Lower
+    TNT1 A 0 A_Lower
+    TNT1 A 0 A_Lower
+    TNT1 A 0 A_Lower
+    TNT1 A 1 A_Lower
+    Loop
+```
+
+**Investigation Needed:**
+- GZDoom's weapon system may be re-raising the weapon after lowering completes
+- May need to use `A_SelectWeapon` or similar function to explicitly switch weapons
+- Possibly needs a flag like `+WEAPON.NOAUTOFIRE` or custom inventory item to track previous weapon
+- Could investigate how other auto-switching weapons (like chainsaw out of fuel) handle this
+
+**Workaround:**
+User can manually switch weapons when energy is full. The weapon functions correctly for charging, just doesn't auto-switch.
+
+---
+
 ## Next Steps
 
-### 1. Testing
+### 1. Fix Auto-Switch Behavior
+Research GZDoom DECORATE weapon switching mechanisms:
+- Investigate `A_SelectWeapon` function
+- Look at vanilla Doom weapon switching code
+- Consider using custom inventory to track previous weapon
+- May need ACS script integration for reliable weapon switching
+
+### 2. Testing
 Load the mod in GZDoom and test all functionality (see checklist above).
 
 **Test Command:**
@@ -263,22 +350,21 @@ Load the mod in GZDoom and test all functionality (see checklist above).
 gzdoom -iwad doom2.wad -file your_mod.pk3 +map map01
 ```
 
-### 2. Balance Adjustment (if needed)
+### 3. Balance Adjustment (if needed)
 
 **If charge rate too fast:**
 ```decorate
-// Change from +1 to +1 every 2 frames
-TROF A 1 A_GiveInventory("Energy", 1)
-TROF A 1  // Extra frame delay
+// Reduce from +2 to +1 per frame
+TROF A 1 A_GiveInventory("Energy", 1)  // Was 2, now 1
 ```
 
 **If charge rate too slow:**
 ```decorate
-// Increase energy per frame
-TROF A 1 A_GiveInventory("Energy", 2)  // Was 1, now 2
+// Increase from +2 to +3 per frame
+TROF A 1 A_GiveInventory("Energy", 3)  // Was 2, now 3
 ```
 
-### 3. Sprite Adjustment (if needed)
+### 4. Sprite Adjustment (if needed)
 
 **If sprite offset wrong:**
 Edit `src/TEXTURES` offset values:
@@ -288,9 +374,9 @@ Offset -155, -128  // X (left/right), Y (up/down)
 // Increase Y to move down: -155, -120
 ```
 
-### 4. Documentation
+### 5. Documentation
 
-Add to mod README/changelog:
+Add to mod README/changelog once auto-switch is fixed:
 ```
 ## Version X.X - Accumulator Update
 
@@ -298,12 +384,17 @@ Add to mod README/changelog:
 - Added Accumulator weapon (Energy Siphon) to all predator classes
   - Passive energy regeneration system
   - Located in weapon slot 8
-  - Auto-switches when energy is full
-  - Visual and audio feedback during charging
-  - Approximately 14 seconds for full charge (0→500)
+  - Charges at 16 energy per cycle (~7.2 seconds for full charge)
+  - Visual feedback with pulsing bright frames during charge
+  - Audio feedback with charging loop and completion sounds
+  - Manual weapon switching recommended when energy is full
+
+### Known Issues
+- Auto-switch to previous weapon needs refinement (manual switch works fine)
 
 ### Credits
 - Accumulator system ported from AVP20_Final_WIP
+- Implementation modified for Predators: Hellspawn Hunters Redux
 ```
 
 ---
@@ -358,4 +449,4 @@ Add to mod README/changelog:
 
 **END OF IMPLEMENTATION SUMMARY**
 
-**Status:** Ready for testing! Press 8 to equip the Accumulator and start charging energy.
+**Current Status:** Functional with known auto-switch issue. Press 8 to equip the Accumulator and start charging energy. Manually switch weapons when charge is complete (completion sound will play).
