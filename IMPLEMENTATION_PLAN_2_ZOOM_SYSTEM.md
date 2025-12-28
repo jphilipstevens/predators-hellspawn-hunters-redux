@@ -33,7 +33,7 @@ The multi-level zoom system allows predators to progressively zoom in on targets
 
 ## Implementation Steps
 
-### PHASE 1: Asset Extraction (30 minutes)
+### PHASE 1: Asset Extraction (30 minutes) ✅ Done
 
 #### Step 1.1: Extract Sound Files
 **Source:** `/home/jono/games/DooM/AVP20_Final_WIP/src/`
@@ -90,7 +90,7 @@ grep -A 10 "Sprite PPCZ" /home/jono/games/DooM/AVP20_Final_WIP/src/TEXTURES
 
 ---
 
-### PHASE 2: Inventory System Setup (20 minutes)
+### PHASE 2: Inventory System Setup (20 minutes) ✅ Done
 
 #### Step 2.1: Create PredZoom Inventory Type
 
@@ -117,7 +117,7 @@ actor PredZoom : Inventory
 
 ---
 
-### PHASE 3: Weapon Integration (PlasmaCaster first)
+### PHASE 3: Weapon Integration (PlasmaCaster first) ✅ Done
 
 Goal: add zoom to **all predator weapons**, but implement and validate on **PlasmaCaster first**. Once PlasmaCaster is stable, apply the same pattern to the rest.
 
@@ -590,28 +590,28 @@ ReadyZoom8x:
 ### 📦 Required Assets
 
 **Sounds (2 files):**
-- [ ] `/predator/pzoomin` - Zoom in sound
-- [ ] `/predator/pzoomout` - Zoom out sound
+- [x] `/predator/pzoomin` - Zoom in sound
+- [x] `/predator/pzoomout` - Zoom out sound
 
 **Sprites (Optional - PPCZ set):**
 - [ ] PPCZA0.png (if implementing proper zoom sprites)
-- [ ] Or use existing weapon sprites initially
+- [x] Or use existing weapon sprites initially
 
 **Code:**
-- [ ] PredZoom inventory actor
-- [ ] Zoom states for each weapon
-- [ ] Modified deselect states
+- [x] PredZoom inventory actor
+- [x] Zoom states for each weapon
+- [x] Modified deselect states
 
 ### 🔧 Modified Files
 
 **Core Files:**
-- [ ] `src/DECORATE.Predator` (add PredZoom inventory)
-- [ ] `src/SNDINFO` (register zoom sounds)
+- [x] `src/DECORATE.Predator` (add PredZoom inventory)
+- [x] `src/SNDINFO` (register zoom sounds)
 
 **Weapon Files:**
-- [ ] `src/DECORATE.Weapons` - PlasmaCaster zoom states
-- [ ] `src/DECORATE.Weapons` - SpearGun zoom states (optional)
-- [ ] `src/DECORATE.Weapons` - Other weapons as desired
+- [x] `src/DECORATE.Weapons` - PlasmaCaster zoom states
+- [x] `src/DECORATE.Weapons` - SpearGun zoom states (optional)
+- [x] `src/DECORATE.Weapons` - Other weapons as desired
 
 ---
 
