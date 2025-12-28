@@ -52,6 +52,8 @@ cloakoff cloakoff
 predvic predvic
 pzoomin pzoomin
 pzoomout pzoomout
+/predator/pzoomin pzoomin
+/predator/pzoomout pzoomout
 
 //WRISTBLADES SPEAR AND WHIP
 $random PRMELEE { HCLAWM2 HCLAWMOV }

@@ -117,14 +117,14 @@ actor PredZoom : Inventory
 
 ---
 
-### PHASE 3: Weapon Integration (1-2 hours)
+### PHASE 3: Weapon Integration (PlasmaCaster first)
 
-The zoom system needs to be added to weapons that should support it. Based on current mod structure, these weapons are good candidates:
+Goal: add zoom to **all predator weapons**, but implement and validate on **PlasmaCaster first**. Once PlasmaCaster is stable, apply the same pattern to the rest.
 
-**Primary Target:** PlasmaCaster (most iconic)
-**Secondary Targets:** SpearGun, maybe Wrist Blades (if desired)
+**Primary Target (first pass):** PlasmaCaster
+**Follow-up (after validation):** all other predator weapons
 
-#### Step 3.1: Modify PlasmaCaster to Support Zoom
+#### Step 3.1: Modify PlasmaCaster to Support Zoom (First Pass)
 
 **File:** `src/DECORATE.Weapons` (line 710+)
 
@@ -360,7 +360,9 @@ ZoomedFire8x:
 
 ---
 
-### PHASE 5: Additional Weapon Integration (30 min per weapon)
+### PHASE 5: Rollout to Remaining Weapons (after PlasmaCaster is stable)
+
+Once PlasmaCaster is validated in live gameplay, apply the same zoom system to the rest of the predator weapons.
 
 #### Apply zoom to other weapons:
 

@@ -22,3 +22,6 @@ addplayerclass LightPredator
    addmenukey "Toggle Green Thermal Vision" tgtv
    alias tgtv "puke 988"
    defaultbind g tgtv
+
+   addmenukey "Predator Weapon Zoom" +zoom
+   defaultbind q +zoom

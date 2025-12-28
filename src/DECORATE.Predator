@@ -64,6 +64,17 @@ ACTOR XXPowerInvisibility99 : PowerInvisibility
 actor CloakOn : Inventory
 {Inventory.MaxAmount 1}
 
+// ZOOM SYSTEM
+actor PredZoom : Inventory
+{
+  Inventory.MaxAmount 3
+}
+
+actor PredZoomLatch : Inventory
+{
+  Inventory.MaxAmount 1
+}
+
 //VISION MODES
 
 ACTOR XXPowerLightAmp : PowerLightAmp
