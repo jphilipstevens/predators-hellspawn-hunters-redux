@@ -1,0 +1,5 @@
+# Build output
+dist/
+
+# PK3 files in root
+/*.pk3
