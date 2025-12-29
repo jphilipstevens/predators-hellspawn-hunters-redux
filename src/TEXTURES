@@ -114,3 +114,519 @@ Sprite PDSAE0, 150, 113
 	Offset -110, -200
 	Patch SDISK4, 0, 0
 }
+
+// BEGIN AVP20_DUALBLADES_SPRITES
+// Auto-generated from AVP20 TEXTURES (PHAND-based)
+Sprite DBLDA0, 463, 48
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -76, -264
+	Patch PHAND06, -213, -5
+	Patch PHAND06, 308, -7
+	{
+		FlipX
+	}
+}
+Sprite DBLDB0, 495, 67
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -72, -245
+	Patch PHAND06, -201, -3
+	Patch PHAND06, 292, -2
+	{
+		FlipX
+	}
+}
+Sprite DBLDC0, 572, 78
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -36, -232
+	Patch PHAND06, -154, -6
+	Patch PHAND06, 317, -9
+	{
+		FlipX
+	}
+}
+Sprite DBLDD0, 618, 85
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -19, -232
+	Patch PHAND06, -124, -19
+	Patch PHAND06, 329, -22
+	{
+		FlipX
+	}
+}
+Sprite DBLDE0, 618, 105
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 4, -210
+	Patch PHAND07, -90, -1
+	Patch PHAND07, 322, -3
+	{
+		FlipX
+	}
+}
+Sprite DBLDF0, 680, 110
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 28, -199
+	Patch PHAND07, -66, -1
+	Patch PHAND07, 344, -3
+	{
+		FlipX
+	}
+}
+Sprite DBLDG0, 729, 121
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 43, -193
+	Patch PHAND08, -54, -6
+	Patch PHAND08, 356, -8
+	{
+		FlipX
+	}
+}
+Sprite DBLDH0, 781, 154
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -166
+	Patch PHAND09, 0, 7
+	Patch PHAND09, 397, 5
+	{
+		FlipX
+	}
+}
+Sprite DBLDI0, 781, 159
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -161
+	Patch PHAND09, 0, 7
+	Patch PHAND09, 397, 5
+	{
+		FlipX
+	}
+}
+Sprite DBLDJ0, 792, 196
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -150
+	Patch PHAND10, 2, 3
+	Patch PHAND10, 394, 2
+	{
+		FlipX
+	}
+}
+Sprite DBLDK0, 781, 169
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -150
+	Patch PHAND11, -10, 4
+	Patch PHAND11, 406, 5
+	{
+		FlipX
+	}
+}
+Sprite DBLDL0, 781, 169
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -150
+	Patch PHAND12, -18, 10
+	Patch PHAND12, 414, 11
+	{
+		FlipX
+	}
+}
+Sprite DBLDM0, 781, 169
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -150
+	Patch PHAND12, -28, 20
+	Patch PHAND12, 424, 21
+	{
+		FlipX
+	}
+}
+Sprite DBLDN0, 781, 170
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 90, -150
+	Patch PHAND12, -38, 30
+	Patch PHAND12, 434, 31
+	{
+		FlipX
+	}
+}
+Sprite DBLNA0, 769, 179
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 35, -152
+	Patch PHAND12, -100, 35
+	Patch PHAND12, 383, 28
+	{
+		FlipX
+	}
+}
+Sprite DBLNB0, 521, 117
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -60, -192
+	Patch PHAND12, -197, 24
+	Patch PHAND12, 335, 54
+	{
+		FlipX
+	}
+}
+Sprite DBLNC0, 521, 117
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -60, -192
+	Patch PHAND12, -197, 24
+	Patch PHAND12, 351, 100
+	{
+		FlipX
+	}
+}
+Sprite DBLND0, 180, 117
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -60, -192
+	Patch PHAND12, -197, 24
+}
+Sprite DBLAA0, 413, 148
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -14, -170
+	Patch PHAND12, -183, 59
+	Patch PHAND16, 239, 76
+}
+Sprite DBLAB0, 457, 149
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 15, -170
+	Patch PHAND12, -203, 75
+	Patch PHAND16, 262, 20
+}
+Sprite DBLAC0, 461, 212
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 50, -109
+	Patch PHAND12, -201, 146
+	Patch PHAND16, 293, -11
+}
+Sprite DBLAD0, 121, 213
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -268, -101
+	Patch PHAND16, -38, -33
+}
+Sprite DBLAE0, 137, 280
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -235, -33
+	Patch PHAND16, -25, -33
+}
+Sprite DBLAF0, 621, 150
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -162
+	Patch PHAND12, -166, 65
+	Patch PHAND12, 264, 1
+	{
+		FlipX
+	}
+}
+Sprite DBLAG0, 595, 157
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -157
+	Patch PHAND12, -174, 78
+	Patch PHAND14, 247, -5
+	{
+		FlipX
+	}
+}
+Sprite DBLAH0, 566, 198
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -132
+	Patch PHAND12, -192, 125
+	Patch PHAND14, 191, -3
+	{
+		FlipX
+	}
+}
+Sprite DBLAI0, 566, 198
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -118
+	Patch PHAND12, -213, 165
+	Patch PHAND14, 150, -3
+	{
+		FlipX
+	}
+}
+Sprite DBLAJ0, 603, 134
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -3, -175
+	Patch PHAND12, -57, -3
+	Patch PHAND12, 382, 39
+	{
+		FlipX
+	}
+}
+Sprite DBLAK0, 603, 169
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -24, -153
+	Patch PHAND12, 383, 75
+	{
+		FlipX
+	}
+	Patch PHAND14, -40, -8
+}
+Sprite DBLAL0, 554, 176
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -59, -132
+	Patch PHAND12, 363, 105
+	{
+		FlipX
+	}
+	Patch PHAND14, -36, -8
+}
+Sprite DBLAM0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLAN0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLAP0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLAQ0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLLA0, 413, 148
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -14, -170
+	Patch PHAND12, -183, 59
+	Patch PHAND16, 239, 76
+}
+Sprite DBLLB0, 457, 149
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 15, -170
+	Patch PHAND12, -203, 75
+	Patch PHAND16, 262, 20
+}
+Sprite DBLLC0, 461, 212
+{
+	XScale 1.800
+	YScale 1.800
+	Offset 50, -109
+	Patch PHAND12, -201, 146
+	Patch PHAND16, 293, -11
+}
+Sprite DBLLD0, 121, 213
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -268, -101
+	Patch PHAND16, -38, -33
+}
+Sprite DBLLE0, 137, 280
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -235, -33
+	Patch PHAND16, -25, -33
+}
+Sprite DBLFA0, 621, 150
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -162
+	Patch PHAND12, -166, 65
+	Patch PHAND12, 264, 1
+	{
+		FlipX
+	}
+}
+Sprite DBLFB0, 595, 157
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -157
+	Patch PHAND12, -174, 78
+	Patch PHAND14, 247, -5
+	{
+		FlipX
+	}
+}
+Sprite DBLFC0, 566, 198
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -132
+	Patch PHAND12, -192, 125
+	Patch PHAND14, 191, -3
+	{
+		FlipX
+	}
+}
+Sprite DBLFD0, 566, 198
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -40, -118
+	Patch PHAND12, -213, 165
+	Patch PHAND14, 150, -3
+	{
+		FlipX
+	}
+}
+Sprite DBLFE0, 603, 134
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -3, -175
+	Patch PHAND12, -57, -3
+	Patch PHAND12, 382, 39
+	{
+		FlipX
+	}
+}
+Sprite DBLFF0, 603, 169
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -24, -153
+	Patch PHAND12, 383, 75
+	{
+		FlipX
+	}
+	Patch PHAND14, -40, -8
+}
+Sprite DBLFG0, 554, 176
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -59, -132
+	Patch PHAND12, 363, 105
+	{
+		FlipX
+	}
+	Patch PHAND14, -36, -8
+}
+Sprite DBLFH0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLFI0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLFJ0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+Sprite DBLFK0, 534, 189
+{
+	XScale 1.800
+	YScale 1.800
+	Offset -98, -122
+	Patch PHAND12, 353, 138
+	{
+		FlipX
+	}
+	Patch PHAND14, -44, -8
+}
+// END AVP20_DUALBLADES_SPRITES

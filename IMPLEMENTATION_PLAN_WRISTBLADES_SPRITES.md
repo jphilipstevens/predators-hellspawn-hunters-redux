@@ -37,7 +37,7 @@ AVP20 `src/` does **not** include the actual `DBL*` sprite frames (only referenc
 
 ---
 
-## PHASE 1: Dual-Blade Sprite Swap (HeavyPredator only)
+## PHASE 1: Dual-Blade Sprite Swap (HeavyPredator only) ✅ Done
 
 ### Step 1.1: Locate AVP20 compiled PK3/WAD
 We need the built file (not the src folder). Once you provide the path, we will extract the `DBL*` sprites.
@@ -99,4 +99,3 @@ After dual blades are validated:
 
 - `src/SPRITES/WEAPONS/WRISTBLADES/` (sprite replacement only)
 - No DECORATE/ZScript changes required unless sprite prefixes are missing
-
