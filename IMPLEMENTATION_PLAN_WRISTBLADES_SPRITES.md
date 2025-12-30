@@ -9,7 +9,7 @@
 
 ## Goal
 
-Keep current wrist-blade behavior and weapon logic, but swap in better-looking AVP20 sprites. Start with **dual-blade classes only** (currently `HeavyPredator` using `DoubleBlades`). Single-blade classes stay unchanged for now; we will evaluate single-blade options after dual-blade testing passes.
+Replace wrist blade sprites with AVP20 visuals **without changing weapon logic or behavior**. Phase 1 already covered dual blades (`DoubleBlades` for `HeavyPredator`). The remaining goal is to replace **single-blade** sprites (`WRST`/`PRAT`) while keeping the current `Wristblade` state machine intact.
 
 ---
 
@@ -79,15 +79,6 @@ If AVP20 does not provide `DBLL` or `DBLF` frames:
 
 ---
 
-## PHASE 2 (Later): Single-Blade Sprite Options
-
-After dual blades are validated:
-- Review AVP20 single-blade options (if any) or create a custom single-blade set derived from dual-blade sprites.
-- Map `WRST/PRAT` to the new single-blade frames.
-- Keep `Wristblade` logic unchanged.
-
----
-
 ## Decision Points Before Phase 1 Execution
 
 - Provide the AVP20 compiled PK3/WAD path so we can extract `DBL*` frames.
@@ -99,3 +90,59 @@ After dual blades are validated:
 
 - `src/SPRITES/WEAPONS/WRISTBLADES/` (sprite replacement only)
 - No DECORATE/ZScript changes required unless sprite prefixes are missing
+
+---
+
+## Single-Blade Reference (AVP20) - Current Implementation
+
+**Source:** `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/Wristblades.txt`
+
+**Actor:** `HuntersCLAWS : Weapon` (Replaces `Fist`)
+- **Sprite prefixes used:** `DBLD` (raise/lower), `DBLN` (ready/idle), `DBLA` (attack chains).
+- **Ready flow:** transitions into `RealReady`, supports zoom and laser-sight logic.
+- **Zoom system:** uses `PredZoom`, `CancelZoom`, `PredZoomLatch` equivalents with `A_ZoomFactor`, `A_ReFire`, and `WRF_ALLOWZOOM`.
+- **State wiring:** `Ready`/`RealReady`/`Select`/`Deselect`/`Fire`/`AltFire`/`Reload`/`Lunge`, with combo tracking (`LightCombo1/2`) and berserk variants.
+- **Behavioral note:** AVP20’s “single-blade” weapon is still **dual-blade art** via `DBL*` sprites, not `WRST/PRAT`.
+
+---
+
+## Current Project Implementation (Single-Blade)
+
+**Source:** `src/DECORATE.Weapons`
+
+**Actor:** `Wristblade : Weapon` (Replaces `Fist`)
+- **Sprite prefixes used:** `WRST` (ready/raise/lower), `PRAT` (attacks), `PRCL` (ready/zoom).
+- **Zoom system:** simplified zoom state within the weapon (uses `PredZoom` + `PredZoomLatch`), `A_ZoomFactor`, `WRF_ALLOWZOOM`.
+- **State wiring:** `Ready` → `RealReady` → `ReadyZoom`, `Select`, `Deselect`, `Fire`, `AltFire`, plus poison/berserk/light predator branches.
+- **Behavioral note:** This is a single-blade logic path with many attack variants driven by inventory flags.
+
+---
+
+## Differences (AVP20 vs This Project)
+
+- **Sprite families:** AVP20 uses `DBL*` for its wrist blades (even for single-blade role). This project uses `WRST`/`PRAT` for single blades.
+- **State complexity:** AVP20 includes lunge/laser-sight subflows and more granular combo tracking; this project uses simpler but heavily branched `PRAT` attack variants.
+- **Zoom wiring:** AVP20 zoom is tightly integrated with Ready/RealReady/CancelZoom and inventory toggles. This project uses a local zoom latch and fewer states.
+- **Art availability:** AVP20 `src` does not ship the actual sprite frames; they are referenced only.
+
+---
+
+## Gap Fill Plan (Single-Blade Sprite Replacement)
+
+**Objective:** Replace `WRST` and `PRAT` sprites with AVP20 visuals while preserving the current `Wristblade` states.
+
+1. **Sprite source decision**
+   - Use AVP20 dual-blade frames as a base (since AVP20’s “single-blade” still uses `DBL*`), or use AVP20 `PHAND*` art if that is the intended look.
+
+2. **Mapping strategy**
+   - **Ready/raise/lower (`WRST`):** map to an ordered subset that matches idle and draw/retract poses.
+   - **Attack (`PRAT`):** map to frames that show blade-extended motion (avoid raise/lower frames).
+
+3. **Implementation method (non-logic)**
+   - Keep `Wristblade` state machine untouched.
+   - Replace/define `WRST*` and `PRAT*` sprite frames (either as real PNGs or via `TEXTURES` composites) so the existing DECORATE references resolve to the new art.
+
+4. **Validation checklist**
+   - `Ready/Select/Deselect` show only new sprites.
+   - `Fire/AltFire` cycles attack frames (not raise/lower).
+   - No missing-frame placeholders.
