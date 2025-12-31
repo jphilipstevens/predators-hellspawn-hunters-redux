@@ -8,3 +8,7 @@ user noarchive float strtofloat = 0.0;
 // Predator Cloak Settings
 user bool pred_infinite_cloak = false;
 user int pred_cloak_strength = 80;
+
+server bool EAI_Debug = false;
+server bool EAI_Stealth = true;
+server float EAI_StealthFactor = 24;

@@ -21,6 +21,11 @@ This mod would not exist without jdredalert's excellent work. Please visit the o
 
 The improved cloaking behavior uses TehRealSalt's decoy-based invisibility system, which creates a more tactical and power-fantasy friendly stealth experience.
 
+**Universal Enhanced AI** - By Joshua Hard (josh771), based on original work by Sterling Parker (Caligari87)
+**GitHub Repository:** https://github.com/JRHard771/Universal-Enhanced-AI
+
+This mod integrates the Universal Enhanced AI system to provide monsters with advanced pathfinding, group coordination, and intelligent search behavior. The implementation has been adapted to work seamlessly with the Predator cloak mechanics.
+
 ## Description
 
 Predators Hellspawn Hunters is a gameplay mod that lets you play as a Predator (Yautja) from the Predator franchise. Hunt demons across the Doom universe with iconic Predator weapons and abilities including:
@@ -41,6 +46,15 @@ Integrated TehRealSalt's alternate invisibility system that replaces the vanilla
 - **Power Fantasy** - Feels more like the Predator's iconic cloaking from the films, rather than just making enemies miss more often
 
 This creates a more engaging stealth experience that rewards tactical positioning and timing.
+
+### Enhanced Monster AI
+Integrated the Universal Enhanced AI system with adaptations for Predator-specific mechanics:
+
+- **Advanced Search Behavior** - Monsters remember your last known position and actively hunt you down, creating tense cat-and-mouse gameplay
+- **Intelligent Pathfinding** - Enemies use smart navigation to track you through complex level geometry
+- **Group Coordination** - Monsters communicate and coordinate their search efforts, flanking and converging on your position
+- **Persistent Hunting** - Demons don't immediately give up when you break line of sight; they'll search for 1-2 minutes before giving up
+- **Cloak Integration** - The Enhanced AI system has been modified to work seamlessly with the Predator cloak and decoy mechanics
 
 ## TODO - Planned Changes
 

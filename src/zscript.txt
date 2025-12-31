@@ -3,6 +3,12 @@ version "4.5"
 // Predator Cloak Stealth System
 // Based on sal-invisibility by Saalvage
 // Integrated for Predator mod cloak mechanics
+// Enhanced AI
+#include "zscript/enhancedAI/main.txt"
+#include "zscript/enhancedAI/search.txt"
+#include "zscript/enhancedAI/path.txt"
+#include "zscript/enhancedAI/group.txt"
+#include "zscript/enhancedAI/stealth.txt"
 
 class PredInvisibleActor : Actor
 {
@@ -29,8 +35,9 @@ class PredInvisHandler : EventHandler
 		if (mo)
 		{
 			let targ = playerInvisTarget[i];
+			bool cloakActive = (mo.FindInventory("CloakOn") != null);
 
-			if (targ && mo.bShadow == false)
+			if (targ && (!cloakActive || mo.bShadow == false))
 			{
 				// Destroy it if it exists
 				targ.Destroy();
@@ -45,8 +52,9 @@ class PredInvisHandler : EventHandler
 		if (mo)
 		{
 			let targ = playerInvisTarget[i];
+			bool cloakActive = (mo.FindInventory("CloakOn") != null);
 
-			if (mo.bShadow == true)
+			if (cloakActive && mo.bShadow == true)
 			{
 				if (targ)
 				{

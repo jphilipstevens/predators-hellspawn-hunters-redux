@@ -138,3 +138,10 @@ Frame FRFXF { Light MissileExplode }
 Frame FRFXG { Light MissileExplode }
 Frame FRFXH { Light MissileExplode }
 }
+
+HardwareShader PostProcess scene
+{
+	Name "stealthvision"
+	Shader "shaders/eai_stealth.fp" 330
+	Uniform float stealth
+}
