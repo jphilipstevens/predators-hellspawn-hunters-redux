@@ -33,12 +33,12 @@ The Accumulator is a passive energy regeneration weapon that allows predators to
 ### PHASE 1: Asset Extraction (30 minutes)
 
 #### Step 1.1: Extract Sprite Files
-**Source:** `/home/jono/games/DooM/AVP20_Final_WIP/src/`
+**Source:** `~/games/DooM/AVP20_Final_WIP/src/`
 
 Need to find and copy TROF sprites:
 ```bash
 # Search for TROF sprite files
-find /home/jono/games/DooM/AVP20_Final_WIP -name "TROF*.png"
+find ~/games/DooM/AVP20_Final_WIP -name "TROF*.png"
 ```
 
 **Required Sprites:**
@@ -51,15 +51,15 @@ find /home/jono/games/DooM/AVP20_Final_WIP -name "TROF*.png"
 - `TROFG0.png` - Frame G (bright charging)
 - `TROFH0.png` - Frame H (bright charging)
 
-**Destination:** `/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/ACCUMULATOR/`
+**Destination:** `~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/ACCUMULATOR/`
 
 **Commands:**
 ```bash
 # Create accumulator sprite directory
-mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/ACCUMULATOR"
+mkdir -p "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/ACCUMULATOR"
 
 # Copy sprites (once found)
-cp /path/to/TROF*.png "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/ACCUMULATOR/"
+cp /path/to/TROF*.png "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/ACCUMULATOR/"
 ```
 
 #### Step 1.2: Extract Sound Files
@@ -73,10 +73,10 @@ cp /path/to/TROF*.png "/home/jono/workspace/personal/predators-hellspawn-hunters
 **Commands:**
 ```bash
 # Create sound directory if needed
-mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SOUNDS/WEAPONS/ACCUMULATOR"
+mkdir -p "~/workspace/personal/predators-hellspawn-hunters-redux/src/SOUNDS/WEAPONS/ACCUMULATOR"
 
 # Find and copy sound files from AVP20
-find /home/jono/games/DooM/AVP20_Final_WIP -iname "*TRALOOP*" -o -iname "*TRALOOPS*" -o -iname "*TRAON*"
+find ~/games/DooM/AVP20_Final_WIP -iname "*TRALOOP*" -o -iname "*TRALOOPS*" -o -iname "*TRAON*"
 # Copy found files to destination
 ```
 
@@ -406,7 +406,7 @@ TROF A 1 A_GiveInventory("Energy", GetCVar("accumulator_rate"))
 
 ### ✅ Before Implementation
 
-- [ ] AVP20 mod accessible at `/home/jono/games/DooM/AVP20_Final_WIP`
+- [ ] AVP20 mod accessible at `~/games/DooM/AVP20_Final_WIP`
 - [ ] Backup current mod (git commit or zip)
 - [ ] GZDoom installed for testing
 - [ ] Text editor ready
@@ -641,6 +641,6 @@ Implementation is successful when:
 **END OF IMPLEMENTATION PLAN 1: ENERGY SIPHON**
 
 For questions or issues during implementation, refer to:
-- AVP20 source: `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/Accumulator.txt`
+- AVP20 source: `~/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/Accumulator.txt`
 - GZDoom Wiki: https://zdoom.org/wiki/
 - This audit report: `AVP20_AUDIT_REPORT.md`

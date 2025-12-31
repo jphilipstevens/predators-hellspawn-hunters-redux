@@ -36,7 +36,7 @@ The multi-level zoom system allows predators to progressively zoom in on targets
 ### PHASE 1: Asset Extraction (30 minutes) ✅ Done
 
 #### Step 1.1: Extract Sound Files
-**Source:** `/home/jono/games/DooM/AVP20_Final_WIP/src/`
+**Source:** `~/games/DooM/AVP20_Final_WIP/src/`
 
 **Required Sounds:**
 - `/predator/pzoomin` - Zoom in sound (plays when increasing zoom level)
@@ -45,10 +45,10 @@ The multi-level zoom system allows predators to progressively zoom in on targets
 **Commands:**
 ```bash
 # Find zoom sound files in AVP20
-find /home/jono/games/DooM/AVP20_Final_WIP -iname "*zoom*" -type f
+find ~/games/DooM/AVP20_Final_WIP -iname "*zoom*" -type f
 
 # Create sound directory
-mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SOUNDS/PREDATOR"
+mkdir -p "~/workspace/personal/predators-hellspawn-hunters-redux/src/SOUNDS/PREDATOR"
 
 # Copy found sound files
 # (path will be determined by find command above)
@@ -66,10 +66,10 @@ mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SO
 **Search for PPCZ:**
 ```bash
 # Find PPCZ sprite files
-find /home/jono/games/DooM/AVP20_Final_WIP -name "PPCZ*.png" -o -name "ppcz*.png"
+find ~/games/DooM/AVP20_Final_WIP -name "PPCZ*.png" -o -name "ppcz*.png"
 
 # Check TEXTURES lump for PPCZ definitions
-grep -A 10 "Sprite PPCZ" /home/jono/games/DooM/AVP20_Final_WIP/src/TEXTURES
+grep -A 10 "Sprite PPCZ" ~/games/DooM/AVP20_Final_WIP/src/TEXTURES
 ```
 
 **Decision Point:**
@@ -505,10 +505,10 @@ Zoom1:
 **Extract PPCZ sprites from AVP20:**
 ```bash
 # Find PPCZ graphics
-find /home/jono/games/DooM/AVP20_Final_WIP -name "*PPCZ*"
+find ~/games/DooM/AVP20_Final_WIP -name "*PPCZ*"
 
 # Check TEXTURES for definitions
-grep -B 5 -A 15 "Sprite PPCZ" /home/jono/games/DooM/AVP20_Final_WIP/src/TEXTURES > ppcz_sprites.txt
+grep -B 5 -A 15 "Sprite PPCZ" ~/games/DooM/AVP20_Final_WIP/src/TEXTURES > ppcz_sprites.txt
 ```
 
 **Replace PCAS sprites in zoom states:**
@@ -785,6 +785,6 @@ Implementation is successful when:
 **END OF IMPLEMENTATION PLAN 2: ZOOM SYSTEM**
 
 For questions or issues during implementation, refer to:
-- AVP20 source: `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/`
+- AVP20 source: `~/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/`
 - GZDoom Wiki A_ZoomFactor: https://zdoom.org/wiki/A_ZoomFactor
 - This audit report: `AVP20_AUDIT_REPORT.md`

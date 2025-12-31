@@ -80,9 +80,9 @@ The current mod has a functional PredatorDisk weapon but with older/lower qualit
 
 ```bash
 # Backup current disk sprites
-mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/backups/DISK_SPRITES_ORIGINAL"
-cp /home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/* \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/backups/DISK_SPRITES_ORIGINAL/"
+mkdir -p "~/workspace/personal/predators-hellspawn-hunters-redux/backups/DISK_SPRITES_ORIGINAL"
+cp ~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/* \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/backups/DISK_SPRITES_ORIGINAL/"
 ```
 
 **Backed up files:**
@@ -96,23 +96,23 @@ cp /home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/W
 
 #### Step 1.2: Extract AVP20 Sprites
 **Source locations:**
-- Weapon view: `/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/`
-- Pickup/HUD: `/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/`
+- Weapon view: `~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/`
+- Pickup/HUD: `~/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/`
 
 **Copy AVP20 sprites:**
 ```bash
 # Copy projectile and pickup sprites
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKF0.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKF0.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKG0.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKG0.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKT0.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKT0.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKV0.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKV0.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/"
 ```
 
 **Note:** AVP20 doesn't have PDSAA-E sprites (uses composite system). Need to handle weapon view differently.
@@ -127,7 +127,7 @@ cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/PDSKV0.p
 
 **Step 2A.1: Find PDSK definitions in AVP20 TEXTURES:**
 ```bash
-grep -n -A 20 "Sprite PDSK" /home/jono/games/DooM/AVP20_Final_WIP/src/TEXTURES > pdsk_textures.txt
+grep -n -A 20 "Sprite PDSK" ~/games/DooM/AVP20_Final_WIP/src/TEXTURES > pdsk_textures.txt
 ```
 
 **Step 2A.2: Create/Edit TEXTURES file:**
@@ -183,20 +183,20 @@ Sprite PDSAE0, 300, 200
 **Step 2A.3: Copy SDISK patch files:**
 ```bash
 # Create patch directory
-mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches"
+mkdir -p "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches"
 
 # Copy SDISK patches
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK1.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK1.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK2.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK2.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK3.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK3.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK4.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK4.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/patches/"
 ```
 
 **Note:** TEXTURES file must be in root of PK3/WAD, not in subdirectory.
@@ -207,21 +207,21 @@ cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DI
 
 ```bash
 # Create simple sprites from patches (loses composite benefits)
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK1.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAA0.png"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK1.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAA0.png"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK2.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAB0.png"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK2.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAB0.png"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK3.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAC0.png"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK3.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAC0.png"
 
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK4.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAD0.png"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK4.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAD0.png"
 
 # Reuse SDISK1 for E frame
-cp "/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK1.png" \
-   "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAE0.png"
+cp "~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/SDISK1.png" \
+   "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/DISK/PDSAE0.png"
 ```
 
 **This approach:**
@@ -281,7 +281,7 @@ Sprite PDSAA0, 300, 200
 
 ```bash
 # Extract Smart Disk TEXTURES section from AVP20
-grep -B 5 -A 15 "PDSK" /home/jono/games/DooM/AVP20_Final_WIP/src/TEXTURES | grep -A 15 "Sprite"
+grep -B 5 -A 15 "PDSK" ~/games/DooM/AVP20_Final_WIP/src/TEXTURES | grep -A 15 "Sprite"
 ```
 
 **Copy exact values from AVP20 for best results.**
@@ -357,7 +357,7 @@ grep -B 5 -A 15 "PDSK" /home/jono/games/DooM/AVP20_Final_WIP/src/TEXTURES | grep
 
 **Check for animated disk sprites:**
 ```bash
-find /home/jono/games/DooM/AVP20_Final_WIP -name "*DISK*" -type f | grep -i sprite
+find ~/games/DooM/AVP20_Final_WIP -name "*DISK*" -type f | grep -i sprite
 ```
 
 **If multiple rotation frames found (e.g., PDSKF0-F7):**
@@ -693,7 +693,7 @@ Implementation is successful when:
 **END OF IMPLEMENTATION PLAN 3: SMART DISK SPRITE UPDATE**
 
 For questions or issues during implementation, refer to:
-- AVP20 sprites: `/home/jono/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/`
-- AVP20 patches: `/home/jono/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/`
+- AVP20 sprites: `~/games/DooM/AVP20_Final_WIP/src/Sprites/Weapons/SmartDisk/`
+- AVP20 patches: `~/games/DooM/AVP20_Final_WIP/src/Graphics/Weapons/Predator/SMART DISK/`
 - GZDoom Wiki TEXTURES: https://zdoom.org/wiki/TEXTURES
 - This audit report: `AVP20_AUDIT_REPORT.md`

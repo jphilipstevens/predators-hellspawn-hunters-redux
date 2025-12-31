@@ -807,7 +807,7 @@ A successful integration should:
 
 **AVP20 Structure:**
 ```
-/home/jono/games/DooM/AVP20_Final_WIP/
+~/games/DooM/AVP20_Final_WIP/
 ├── PREDATOR_WEAPON_SPRITE_SYSTEM.md
 └── src/
     ├── Actors/
@@ -833,7 +833,7 @@ A successful integration should:
 
 **Current Mod Structure:**
 ```
-/home/jono/workspace/personal/predators-hellspawn-hunters-redux/
+~/workspace/personal/predators-hellspawn-hunters-redux/
 └── src/
     ├── DECORATE.Weapons
     ├── DECORATE.Predator

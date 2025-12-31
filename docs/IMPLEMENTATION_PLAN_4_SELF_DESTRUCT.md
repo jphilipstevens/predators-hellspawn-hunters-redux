@@ -67,7 +67,7 @@ The self-destruct system is a classic Predator feature where the player can trig
 ### PHASE 1: Asset Extraction (30 minutes)
 
 #### Step 1.1: Extract Countdown Sprites
-**Source:** `/home/jono/games/DooM/AVP20_Final_WIP/src/`
+**Source:** `~/games/DooM/AVP20_Final_WIP/src/`
 
 **Required Sprites:**
 - `SEDSA0.png` - Countdown display "3"
@@ -78,13 +78,13 @@ The self-destruct system is a classic Predator feature where the player can trig
 **Commands:**
 ```bash
 # Find SEDS sprites
-find /home/jono/games/DooM/AVP20_Final_WIP -name "SEDS*.png"
+find ~/games/DooM/AVP20_Final_WIP -name "SEDS*.png"
 
 # Create self-destruct sprite directory
-mkdir -p "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/SELFDESTRUCT"
+mkdir -p "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/SELFDESTRUCT"
 
 # Copy sprites (once found)
-cp /path/to/SEDS*.png "/home/jono/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/SELFDESTRUCT/"
+cp /path/to/SEDS*.png "~/workspace/personal/predators-hellspawn-hunters-redux/src/SPRITES/WEAPONS/SELFDESTRUCT/"
 ```
 
 #### Step 1.2: Extract Sound Files
@@ -99,10 +99,10 @@ cp /path/to/SEDS*.png "/home/jono/workspace/personal/predators-hellspawn-hunters
 **Commands:**
 ```bash
 # Search for self-destruct related sounds
-find /home/jono/games/DooM/AVP20_Final_WIP -iname "*destruct*" -o -iname "*countdown*"
+find ~/games/DooM/AVP20_Final_WIP -iname "*destruct*" -o -iname "*countdown*"
 
 # Check for explosion sounds
-find /home/jono/games/DooM/AVP20_Final_WIP/src/SOUNDS -iname "*explo*"
+find ~/games/DooM/AVP20_Final_WIP/src/SOUNDS -iname "*explo*"
 ```
 
 **Note:** Can reuse existing sounds if self-destruct specific ones not found.
@@ -932,7 +932,7 @@ Trigger:
 **END OF IMPLEMENTATION PLAN 4: SELF-DESTRUCT SYSTEM**
 
 For questions or issues during implementation, refer to:
-- AVP20 source: `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/SelfD.txt`
+- AVP20 source: `~/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/SelfD.txt`
 - GZDoom Wiki ACS: https://zdoom.org/wiki/ACS
 - GZDoom Wiki A_Explode: https://zdoom.org/wiki/A_Explode
 - This audit report: `AVP20_AUDIT_REPORT.md`

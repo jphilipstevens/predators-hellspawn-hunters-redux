@@ -30,7 +30,7 @@ Without these flags, GZDoom's invisibility system did not properly apply the vis
 
 ## Solution
 
-Checked actual AVP20 source code at `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Items/Artifacts.txt` and applied the exact implementation.
+Checked actual AVP20 source code at `~/games/DooM/AVP20_Final_WIP/src/Actors/Items/Artifacts.txt` and applied the exact implementation.
 
 ### Files Modified
 
@@ -277,7 +277,7 @@ ACTOR XXPowerInvisibility : PowerInvisibility
 ## Credits
 
 - **Original Implementation:** AVP20_Final_WIP mod
-- **Source Reference:** `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Items/Artifacts.txt` (lines 123-133)
+- **Source Reference:** `~/games/DooM/AVP20_Final_WIP/src/Actors/Items/Artifacts.txt` (lines 123-133)
 - **Fix Applied:** December 26, 2025
 - **Integration:** Predators: Hellspawn Hunters Redux
 

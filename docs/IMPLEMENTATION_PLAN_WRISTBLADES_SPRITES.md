@@ -95,7 +95,7 @@ If AVP20 does not provide `DBLL` or `DBLF` frames:
 
 ## Single-Blade Reference (AVP20) - Current Implementation
 
-**Source:** `/home/jono/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/Wristblades.txt`
+**Source:** `~/games/DooM/AVP20_Final_WIP/src/Actors/Weapons/Predator/Wristblades.txt`
 
 **Actor:** `HuntersCLAWS : Weapon` (Replaces `Fist`)
 - **Sprite prefixes used:** `DBLD` (raise/lower), `DBLN` (ready/idle), `DBLA` (attack chains).
